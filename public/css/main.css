@@ -1,0 +1,160 @@
+html {
+    background-color: #EBEBEB;
+}
+body{
+    font-size: 14px;
+}
+a:link{
+    color: #337ab7;
+}
+a:hover{
+    color: #286090;
+}
+
+/* banner */
+
+.banner {
+    height: 222px;
+    background: url(/public/images/hello-i-m-nik-800113-unsplash.jpg) no-repeat center center;
+}
+
+/* 导航 */
+
+.nav-wrap {
+    background-color: #fff;
+}
+
+.nav {
+    margin: 0 auto;
+    width: 1000px;
+    height: 56px;
+    line-height: 56px;
+    font-size: 16px;
+}
+
+.nav a {
+    margin: 0 20px;
+}
+
+.content {
+    margin: 0 auto;
+    width: 1000px;
+    display: flex;
+}
+
+/* 左 */
+.content-left{
+    width: 700px;
+}
+.content-item{
+    margin: 20px 0;
+    background-color: #fff;
+    padding: 30px;
+}
+.content-item-title{
+    text-align: center;
+    font-size: 18px;
+}
+.content-item-info{
+    margin-top: 20px;
+    color: #ccc;
+}
+.content-item-summary{
+    margin-top: 20px;
+}
+.content-item-ope{
+    margin-top: 20px;
+}
+.content-item-btn{
+}
+
+
+/* 右 */
+.content-right{
+    flex: 1;
+    margin-left: 20px;
+}
+.user-info{
+    margin: 20px 0;
+    background-color: #fff;
+    padding: 10px 20px;
+}
+.user-info-title{
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+    font-size: 16px;
+}
+.user-info-username{
+    margin-top: 10px;
+}
+.user-info-ope{
+    margin-top: 10px;
+}
+.user-info-logout{
+    margin-top: 10px;
+}
+
+/* 注册/登录 */
+.reg-or-login{
+    background-color: #fff;
+    padding: 10px 20px;
+}
+.rol-title{
+    font-size: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+}
+.reg-or-login li{
+    margin-top: 10px;
+}
+.reg-or-login input{
+    border-radius: 4px;
+    padding: 0 6px;
+    box-sizing: border-box;
+    width: 100%;
+    height: 26px;
+    border: 1px solid #ccc;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+}
+.reg-or-login input:focus{
+    outline: none;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
+}
+.rol-btn{
+    border-radius: 4px;
+    color: #fff;
+    display: block;
+    height: 26px;
+    line-height: 26px;
+    background-color: #337ab7;
+    text-align: center;
+    cursor: pointer;
+}
+.rol-btn:hover{
+    background-color: #286090;
+}
+
+
+/* 友情链接 */
+.friend-link{
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #fff;
+}
+.fl-title{
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+}
+.fl-list{
+    margin-top: 10px;
+    line-height: 24px;
+}
+
+/* 页脚 */
+.footer{
+    height: 56px;
+    line-height: 56px;
+    background-color: #1D1812;
+    text-align: center;
+    color: #fff;
+}
