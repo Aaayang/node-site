@@ -1,7 +1,22 @@
 const mongoose = require('mongoose');
 const express = require('express');
 const app = express();
+const session = require('express-session');
+const bodyParser = require('body-parser');
 const config = require('./config');
+
+// 解析 POST 数据
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.use(bodyParser.json());
+
+// 配置 session
+app.use(session({
+    secret: "hello world",
+    resave: true,
+    saveUninitialized: true
+}));
 
 // 以 public 开头的静态目录
 app.use('/public', express.static('public'));
@@ -10,11 +25,10 @@ app.use('/public', express.static('public'));
 app.engine('html', require('ejs').__express);
 app.set('view engine', 'html');
 
-app.get('/', (req, res) => {
-    res.render('index', {
-        name: 'aaayang'
-    });
-});
+// 前台
+app.use('/', require('./routers/front'));
+app.use('/admin', require('./routers/admin'));
+
 
 mongoose.connect(config.DB_URL, {
     useNewUrlParser: true

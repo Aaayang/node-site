@@ -1,14 +1,19 @@
 html {
-    background-color: #EBEBEB;
+    /* background-color: #EBEBEB; */
 }
 body{
+    color: #201B16;
     font-size: 14px;
+    background: url(/public/images/dust.png) repeat;
+}
+a{
+    text-decoration: none;
 }
 a:link{
-    color: #337ab7;
+    color: #273035;
 }
 a:hover{
-    color: #286090;
+    color: #449d44;
 }
 
 /* banner */
@@ -22,6 +27,7 @@ a:hover{
 
 .nav-wrap {
     background-color: #fff;
+    box-shadow: 0 2px 8px rgb(219,216,199);
 }
 
 .nav {
@@ -34,6 +40,9 @@ a:hover{
 
 .nav a {
     margin: 0 20px;
+}
+.nav .active{
+    color: #5cb85c;
 }
 
 .content {
@@ -56,6 +65,7 @@ a:hover{
     font-size: 18px;
 }
 .content-item-info{
+    text-align: center;
     margin-top: 20px;
     color: #ccc;
 }
@@ -65,44 +75,101 @@ a:hover{
 .content-item-ope{
     margin-top: 20px;
 }
-.content-item-btn{
+a.content-item-btn{
+    color: #5cb85c;
+    text-decoration: underline;
+}
+.content-item-btn:hover{
+    color: #449d44;
 }
 
 
 /* 右 */
 .content-right{
+    padding-top: 20px;
     flex: 1;
     margin-left: 20px;
 }
 .user-info{
-    margin: 20px 0;
+    margin-bottom: 20px;
     background-color: #fff;
-    padding: 10px 20px;
 }
 .user-info-title{
     border-bottom: 1px solid #ccc;
-    padding-bottom: 10px;
+    padding: 10px 20px;
     font-size: 16px;
 }
-.user-info-username{
-    margin-top: 10px;
+.user-info-con{
+    padding: 20px;
+}
+.uic{
+    display: flex;
+    justify-content: center;
+    line-height: 20px;
+}
+.avatar{
+    margin-left: 10px;
+    width: 50px;
+    height: 50px;
+}
+.avatar img{
+    width: 100%;
+    height: 100%;
+}
+.uic-info{
+    padding-left: 15px;
+}
+.uic-info p:nth-of-type(1) {
+    margin-top: 5px;
+}
+.uic-info p:nth-of-type(2) {
+    margin-top: 5px;
 }
 .user-info-ope{
-    margin-top: 10px;
+    margin-top: 20px;
+    text-align: center;
 }
+.user-info-ope a{
+    color: #5cb85c;
+    text-decoration: underline;
+}
+.user-info-ope a:hover{
+    color: #449d44;
+}
+
 .user-info-logout{
     margin-top: 10px;
+}
+.logout-btn{
+    color: #5cb85c;
+    cursor: pointer;
+}
+.logout-btn:hover{
+    color: #449d44;
 }
 
 /* 注册/登录 */
 .reg-or-login{
     background-color: #fff;
-    padding: 10px 20px;
+    padding-bottom: 20px;
 }
 .rol-title{
     font-size: 16px;
-    padding-bottom: 10px;
+    padding: 10px 20px;
     border-bottom: 1px solid #ccc;
+}
+.rol-list{
+    padding: 10px 20px 0;
+}
+.rol-list li:last-of-type{
+    margin-top: 20px;
+    text-align: right;
+}
+.rol-list .rol-link{
+    color: #5cb85c;
+}
+.rol-list .rol-link:hover{
+    color: #449d44;
 }
 .reg-or-login li{
     margin-top: 10px;
@@ -126,28 +193,32 @@ a:hover{
     display: block;
     height: 26px;
     line-height: 26px;
-    background-color: #337ab7;
+    background-color: #5cb85c;
     text-align: center;
     cursor: pointer;
+    border: 1px solid #4cae4c;
 }
 .rol-btn:hover{
-    background-color: #286090;
+    background-color: #449d44;
+    border-color: #398439;
 }
 
 
 /* 友情链接 */
 .friend-link{
     margin-top: 20px;
-    padding: 10px 20px;
     background-color: #fff;
 }
 .fl-title{
-    padding-bottom: 10px;
+    padding: 10px 20px;
     border-bottom: 1px solid #ccc;
 }
 .fl-list{
-    margin-top: 10px;
     line-height: 24px;
+    padding: 20px;
+}
+.fl-list a{
+    text-decoration: underline;
 }
 
 /* 页脚 */
