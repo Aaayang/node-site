@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
 
-
 let responseData = {};
 router.use((req, res, next) => {
     responseData.code = 0;
@@ -71,7 +70,9 @@ router.post('/login',checkLoginInfo, (req, res) => {
         password
     }).then(findRes => {
         if(findRes) {
-            req.session.userInfo = findRes.username;
+            let {_id, username} = findRes;
+            // 登录的时候设置 session 到 cookie
+            req.session.userInfo = {_id,username};
             responseData.msg = '登录成功';
             return res.json(responseData);
         } else {
@@ -85,7 +86,7 @@ router.post('/login',checkLoginInfo, (req, res) => {
 router.get('/logout', (req, res) => {
     req.session.userInfo = null;
     responseData.msg = '退出成功';
-    res.json(responseData);
+    return res.json(responseData);
 });
 
 module.exports = router;

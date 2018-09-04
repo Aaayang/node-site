@@ -3,6 +3,8 @@ const express = require('express');
 const app = express();
 const session = require('express-session');
 const bodyParser = require('body-parser');
+const MongoStore = require('connect-mongo')(session);
+const cookieParser = require('cookie-parser');
 const config = require('./config');
 
 // 解析 POST 数据
@@ -11,9 +13,14 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
+app.use(cookieParser());
 // 配置 session
 app.use(session({
-    secret: "hello world",
+    secret: config.secret,
+    store: new MongoStore({
+        url: config.DB_URL,
+        collection: 'sessions'
+    }),
     resave: true,
     saveUninitialized: true
 }));
