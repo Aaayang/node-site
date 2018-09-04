@@ -12,6 +12,10 @@ $(function() {
 
             this.$logoutBtn = $('#js-logout-btn');
 
+            this.$loginBox = $('#js-loginbox');
+
+            this.$loginRegTip = $('#js-login-reg-tip');
+
             this.loginData = {
                 titleTxt: "登录",
                 repassword: false,
@@ -67,7 +71,8 @@ $(function() {
                         },
                         dataType: 'json',
                         success: function(res) {
-                            
+                            that.$loginRegTip.html(res.msg).fadeIn(200).addClass('tip-err').delay(2000).fadeOut();
+                            that.$loginChange.click();
                         }
                     });
                 } else {
@@ -84,6 +89,8 @@ $(function() {
                                 setTimeout(() => {
                                     location.reload();    
                                 }, 200);
+                            } else {
+                                that.$loginRegTip.html(res.msg).fadeIn(200).addClass('tip-err').delay(2000).fadeOut();
                             }
                         }
                     });

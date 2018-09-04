@@ -80,15 +80,18 @@
                             <img src="/public/images/avatar.png" alt="">
                         </div>
                         <div class="uic-info">
-                            <p><span>Admin</span></p>
+                            <p><span><%=userInfo.username%></span></p>
                             <p><span id="js-logout-btn" class="logout-btn">退出</span></p>
                         </div>
                     </div>
+                    <%if(userInfo.isAdmin){%>
                     <div class="user-info-ope">你好，你是管理员，<a href="javascript:;">管理后台</a></div>
+                    <%}%>
                 </div>
             </div>
             <%}%>
-            <div class="reg-or-login">
+            <%if(!userInfo){%>
+            <div class="reg-or-login" id="js-loginbox">
                 <h3 id="js-login-title" class="rol-title">登录</h3>
                 <ul class="rol-list">
                     <li>
@@ -104,11 +107,13 @@
                         <span id="js-loginorreg-btn" class="rol-btn">登录</span>
                     </li>
                     <li>
+                        <span id="js-login-reg-tip" class="login-reg-tip"></span>
                         <span id="js-login-tip" class="rol-tip">没有账号？</span>
                         <a id="js-login-change" href="javascript:;" class="rol-link">马上注册</a>
                     </li>
                 </ul>
             </div>
+            <%}%>
             <div class="friend-link">
                 <h3 class="fl-title">友链</h3>
                 <ul class="fl-list">

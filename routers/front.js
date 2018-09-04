@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
+const crypto = require('crypto');
 
 let responseData = {};
 router.use((req, res, next) => {
@@ -46,6 +47,9 @@ router.post('/reg', checkRegInfo, (req, res) => {
             return res.json(responseData);
         }
 
+        let hmac = crypto.createHmac('sha1', 'weixian');
+        hmac.update(password);
+        password = hmac.digest('hex');// 搞成16进制，默认是 buffer
         // 没有的话再保存
         User.create({
             username,
@@ -65,14 +69,18 @@ function checkLoginInfo(req, res, next) {
 
 router.post('/login',checkLoginInfo, (req, res) => {
     let {username, password} = req.body;
+    let hmac = crypto.createHmac('sha1', 'weixian');
+    hmac.update(password);
+    password = hmac.digest('hex');// 搞成16进制，默认是 buffer
+
     User.findOne({
         username,
         password
     }).then(findRes => {
         if(findRes) {
-            let {_id, username} = findRes;
+            let {_id, username, isAdmin} = findRes;
             // 登录的时候设置 session 到 cookie
-            req.session.userInfo = {_id,username};
+            req.session.userInfo = {_id,username,isAdmin};
             responseData.msg = '登录成功';
             return res.json(responseData);
         } else {
