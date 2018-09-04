@@ -37,6 +37,8 @@ $(function() {
             this.switchLoginReg();
             // 登录注册按钮
             this.loginOrReg();
+            // 回车登录/注册
+            this.bindEnter();
             // 退出
             this.logout();
         }
@@ -56,57 +58,49 @@ $(function() {
                 $(this).html(that.loginData.loginChange);
             });
         }
-        // 待优化
         function loginOrReg() {
             let that = this;
             this.$loginOrRegBtn.on('click', function() {
-                if($(this).html() === '注册') {
-                    $.ajax({
-                        url: '/reg',
-                        type: "POST",
-                        data: {
-                            username: that.$username.val(),
-                            password: that.$password.val(),
-                            repassword: that.$repassword.val()
-                        },
-                        dataType: 'json',
-                        success: function(res) {
-                            that.$loginRegTip.html(res.msg).fadeIn(200).addClass('tip-err').delay(2000).fadeOut();
-                            that.$loginChange.click();
-                        }
-                    });
-                } else {
-                    $.ajax({
-                        url: '/login',
-                        type: "POST",
-                        data: {
-                            username: that.$username.val(),
-                            password: that.$password.val()
-                        },
-                        dataType: 'json',
-                        success: function(res) {
-                            if(!res.code) {
-                                setTimeout(() => {
-                                    location.reload();    
-                                }, 200);
-                            } else {
-                                that.$loginRegTip.html(res.msg).fadeIn(200).addClass('tip-err').delay(2000).fadeOut();
-                            }
-                        }
-                    });
-                }
+                let url = $(this).html() === '注册' ? '/reg' : '/login';
+                let data = {
+                    username: that.$username.val(),
+                    password: that.$password.val(),
+                    repassword: that.$repassword.val()
+                };
+                Utils.ajax({url,data}).then(res => {
+                    if(!res.code) {
+                        setTimeout(() => {
+                            location.reload();
+                        }, 1000);
+                    } else {
+                        
+                    }
+                    that.$loginRegTip.html(res.msg).stop().fadeIn(200).addClass('tip-err').delay(2000).fadeOut();
+                });
             });
-            
+        }
+        function bindEnter() {
+            let that = this;
+            function _submit(e) {
+                if(e.keyCode === 13) {
+                    that.$loginOrRegBtn.click();
+                }
+            }
+            this.$username.on('keydown', _submit);
+            this.$password.on('keydown', _submit);
         }
         function logout() {
+            let that = this;
             this.$logoutBtn.on('click', function() {
-                $.ajax({
-                    url: '/logout',
-                    type: "GET",
-                    success: function(res) {
+                let url = "/logout";
+                let type = "GET";
+                Utils.ajax({url,type}).then(res => {
+                    if(!res.code) {
                         setTimeout(() => {
-                            location.reload();    
-                        }, 200);
+                            location.reload();
+                        }, 1000);
+                    } else {
+                        
                     }
                 });
             });
@@ -116,7 +110,8 @@ $(function() {
             bindEvent,
             switchLoginReg,
             loginOrReg,
-            logout
+            logout,
+            bindEnter
         };
     }();
     Index.init();

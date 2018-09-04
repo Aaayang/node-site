@@ -64,6 +64,13 @@ router.post('/reg', checkRegInfo, (req, res) => {
 
 // 验证登录信息，待验证
 function checkLoginInfo(req, res, next) {
+    // 待优化
+    let {username, password, repassword} = req.body;
+    if(username === "" || password === "") {
+        responseData.code = 1;
+        responseData.msg = '用户名或密码不能为空';
+        return res.json(responseData);
+    }
     next();
 }
 
