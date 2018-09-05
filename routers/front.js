@@ -5,6 +5,7 @@ const crypto = require('crypto');
 const formidable = require('formidable');
 const path = require('path');
 const fs = require('fs');
+const gm = require('gm');
 
 let responseData = {};
 router.use((req, res, next) => {
@@ -89,6 +90,7 @@ router.post('/login',checkLoginInfo, (req, res) => {
     }).then(findRes => {
         if(findRes) {
             let {_id, username, isAdmin,avatar} = findRes;
+
             // 登录的时候设置 session 到 cookie
             req.session.userInfo = {_id,username,isAdmin,avatar};
             responseData.msg = '登录成功';
@@ -124,13 +126,45 @@ router.post('/upload', (req, res) => {
                     responseData.msg = '上传成功，但改名失败了';
                     return res.json(responseData);
                 }
-                // 记录下头像名
-                req.session.userInfo.avatar = fileName;
-                responseData.avatar = fileName;
-                responseData.msg = '上传并改名成功';
-                return res.json(responseData);
+                // 上传成功，改名成功后把图片改成需要的大小，很关键！！
+                gm(newFile).resize(264)// 等比变成宽度264
+                .crop(264, 264, 0, 0)// 保留高度264，使不溢出
+                .write(newFile, function (err) {
+                    if (err) {
+                        responseData.code = 1;
+                        responseData.msg = '缩放图片失败';
+                        return res.json(responseData);
+                    }
+                    // 记录下头像名
+                    req.session.userInfo.avatar = fileName;
+                    // 前端拿到这个名字也可以进行更新，也可以reload一下
+                    responseData.avatar = fileName;
+                    responseData.msg = '已改成目标大小';
+                    return res.json(responseData);
+                });
             });
     });
-})
+});
+
+router.get('/cutimg', (req, res) => {
+    let imgName = req.session.userInfo.avatar,
+        w = req.query.w,
+        h = req.query.h,
+        x = req.query.x,
+        y = req.query.y,
+        newFile = path.join(__dirname, '/../public/upload/') + imgName;
+        console.log(x, y, w, h, imgName);
+        gm(newFile).crop(w, h, x, y)
+        .resize(70, 70, "!")// "!"表示强制缩放成目标大小
+        .write(newFile, function (err) {
+            if (err) {
+                responseData.code = 1;
+                responseData.msg = '裁剪失败';
+                return res.json(responseData);
+            }
+            responseData.msg = '裁剪成功';
+            res.json(responseData);
+        });
+});
 
 module.exports = router;

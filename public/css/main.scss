@@ -254,6 +254,7 @@ a:hover {
 }
 
 .mask {
+    display: none;
     z-index: 9;
     position: fixed;
     top: 0;
@@ -294,7 +295,7 @@ a:hover {
             }
             .sm-cut {
                 position: absolute;
-                z-index: 20;
+                z-index: 8;
                 top: -55px;
                 left: -300px;
                 .preview-container {

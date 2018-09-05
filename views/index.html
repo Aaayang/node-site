@@ -82,7 +82,7 @@
                         </div>
                         <div class="uic-info">
                             <p><span>用户名：<%=userInfo.username%></span></p>
-                            <p><span class="modify-avatar">裁切头像</span></p>
+                            <p><span id="js-show-cut" class="modify-avatar">裁切头像</span></p>
                             <p><span id="js-logout-btn" class="logout-btn">退出</span></p>
                         </div>
                     </div>
@@ -127,26 +127,29 @@
         </div>
     </div>
     <footer class="footer">
-        <span>学习交流</span>
+        <span>学习交流<%=userInfo%></span>
     </footer>
-    <div class="mask">
+    
+    <%if(userInfo){%>
+    <div id="js-mask" class="mask">
         <div class="dialog-cut-img">
             <div class="dci-title">裁剪</div>
-            <div class="dci-con">
+            <div id="js-dci-con" class="dci-con">
                 <div class="jc-demo-box">
-                    <img src="/public/upload/avatar.jpg" id="js-cut-img" alt="avatar" />
+                    <img src="/public/upload/<%=userInfo.avatar%>" id="js-cut-img" alt="avatar" />
                     <div id="preview-pane" class="sm-cut">
                         <div class="preview-container">
-                            <img src="/public/upload/avatar.jpg" class="jcrop-preview" alt="Preview" />
+                            <img src="/public/upload/<%=userInfo.avatar%>" class="jcrop-preview" alt="Preview" />
                         </div>
                     </div>
                 </div>
                 <div class="dci-con-ope">
-                    <span id="cutImage" class="upload-btn">裁剪</span>
+                    <span id="js-cut-img-btn" class="upload-btn">裁剪</span>
                 </div>
             </div>
         </div>
     </div>
+    <%}%>
     <script src="https://cdn.bootcss.com/jquery/1.8.0/jquery.min.js"></script>
     <script src="/public/js/jquery.Jcrop.js"></script>
     <script src="/public/js/utils.js"></script>

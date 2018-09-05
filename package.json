@@ -26,6 +26,7 @@
     "express": "^4.16.3",
     "express-session": "^1.15.6",
     "formidable": "^1.2.1",
+    "gm": "^1.23.1",
     "mongoose": "^5.2.12"
   }
 }

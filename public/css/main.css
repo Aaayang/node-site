@@ -196,6 +196,7 @@ a:hover {
   color: #fff; }
 
 .mask {
+  display: none;
   z-index: 9;
   position: fixed;
   top: 0;
@@ -231,7 +232,7 @@ a:hover {
       opacity: 0; }
     .mask .dci-con .jc-demo-box .sm-cut {
       position: absolute;
-      z-index: 20;
+      z-index: 8;
       top: -55px;
       left: -300px; }
       .mask .dci-con .jc-demo-box .sm-cut .preview-container {

@@ -19,6 +19,8 @@ $(function () {
             this.$avatarFile = $('#js-avatar-file');
             this.$jsAvatarImg = $('#js-avatar-img');
 
+            this.$mask = $('#js-mask');
+
             this.loginData = {
                 titleTxt: "登录",
                 repassword: false,
@@ -46,7 +48,12 @@ $(function () {
             this.logout();
             // 上传头像
             this.uploadAvatar();
-            this.cutImg();
+            // 裁剪图片
+            this.opeCutImg();
+            // 遮罩
+            this.handleMask();
+
+            this.confirmCutImg();
         }
         function switchLoginReg() {
             let that = this;
@@ -121,48 +128,87 @@ $(function () {
                     type: 'POST',
                     data: fd,
                     dataType: 'json',
-                    processData: false,  // 不处理数据
-                    contentType: false,   // 不设置内容类型
+                    processData: false, // 不处理数据
+                    contentType: false, // 不设置内容类型
                     success: function (res) {
-                        that.$jsAvatarImg.attr('src', `/public/upload/${res.avatar}`);
+                        // 上传成功可以 jQ 替换，当然也可以刷新一下
+                        // that.$jsAvatarImg.attr('src', `/public/upload/${res.avatar}`);
+                        location.reload();
                     }
                 });
             });
         }
-        function cutImg() {
-            let jcrop_api,
-                boundx,
-                boundy,
-                $preview = $('#preview-pane'),
-                $pcnt = $('#preview-pane .preview-container'),
-                $pimg = $('#preview-pane .preview-container img'),
-                xsize = $pcnt.width(),
-                ysize = $pcnt.height();
-
-            $('#js-cut-img').Jcrop({
-                onChange: updatePreview,
-                onSelect: updatePreview,
-                aspectRatio: xsize / ysize
-            }, function () {
-                let bounds = this.getBounds();
-                boundx = bounds[0];
-                boundy = bounds[1];
-                jcrop_api = this;
-
-                $preview.appendTo(jcrop_api.ui.holder);
+        function opeCutImg() {
+            let that = this;
+            let $showCut = $('#js-show-cut');
+            let $cutImg = $('#js-cut-img');
+            $showCut.on('click', function() {
+                that.$mask.show();
+                let jcrop_api,
+                    boundx,
+                    boundy,
+                    $preview = $('#preview-pane'),
+                    $pcnt = $('#preview-pane .preview-container'),
+                    $pimg = $('#preview-pane .preview-container img'),
+                    xsize = $pcnt.width(),
+                    ysize = $pcnt.height(),
+                    $dciCon = $('#js-dci-con');
+            
+                $cutImg.Jcrop({
+                    onChange: updatePreview,
+                    onSelect: updatePreview,
+                    aspectRatio: xsize / ysize,
+                    // 设置图片的大小，不想是原始大小，这个通过后端裁剪完成
+                    // boxWidth: $dciCon.width()
+                }, function () {
+                    let bounds = this.getBounds();
+                    boundx = bounds[0];
+                    boundy = bounds[1];
+                    jcrop_api = this;
+                    $preview.appendTo(jcrop_api.ui.holder);
+                });
+                function updatePreview(c) {
+                    if (parseInt(c.w) > 0) {
+                        let rx = xsize / c.w;
+                        let ry = ysize / c.h;
+                        $pimg.css({
+                            width: Math.round(rx * boundx) + "px",
+                            height: Math.round(ry * boundy) + 'px',
+                            marginLeft: '-' + Math.round(rx * c.x) + 'px',
+                            marginTop: '-' + Math.round(ry * c.y) + 'px'
+                        });
+                    }
+                };
             });
-            function updatePreview(c) {
-                if (parseInt(c.w) > 0) {
-                    let rx = xsize / c.w;
-                    let ry = ysize / c.h;
-                    $pimg.css({
-                        width: Math.round(rx * boundx) + "px",
-                        height: Math.round(ry * boundy) + 'px',
-                        marginLeft: '-' + Math.round(rx * c.x) + 'px',
-                        marginTop: '-' + Math.round(ry * c.y) + 'px'
-                    });
-                }
-            };
+        }
+        function handleMask() {
+            $('.dialog-cut-img').on('click', function(e) {
+                e.stopPropagation();
+            });
+            this.$mask.on('click', function() {
+                $(this).hide();
+            });
+        }
+        function confirmCutImg() {
+            let that = this;
+            let $cutImgBtn = $('#js-cut-img-btn');
+            $cutImgBtn.on('click', function() {
+                let w = parseInt($(".jcrop-holder>div:first").css("width")),
+                    h = parseInt($(".jcrop-holder>div:first").css("height")),
+                    x = parseInt($(".jcrop-holder>div:first").css("left")),
+                    y = parseInt($(".jcrop-holder>div:first").css("top"));
+                $.get("/cutimg", {
+                    w,
+                    h,
+                    x,
+                    y
+                }, function (res) {
+                    if(!res.code) {
+                        that.$mask.hide();
+                        location.reload();
+                    }
+                });
+            });
         }
         return {
             init,
@@ -172,7 +218,9 @@ $(function () {
             logout,
             bindEnter,
             uploadAvatar,
-            cutImg
+            opeCutImg,
+            handleMask,
+            confirmCutImg
         };
     }();
     Index.init();
