@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>首页</title>
     <link rel="shortcut icon" href="/public/images/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="/public/css/reset.css">
+    <link rel="stylesheet" href="/public/css/jquery.Jcrop.css">
     <link rel="stylesheet" href="/public/css/main.css">
 </head>
 
@@ -77,10 +77,12 @@
                 <div class="user-info-con">
                     <div class="uic">
                         <div class="avatar">
-                            <img src="/public/images/avatar.png" alt="">
+                            <input id="js-avatar-file" class="avatar-file" type="file" name="avatar">
+                            <img id="js-avatar-img" src="/public/upload/<%=userInfo.avatar%>" alt="">
                         </div>
                         <div class="uic-info">
-                            <p><span><%=userInfo.username%></span></p>
+                            <p><span>用户名：<%=userInfo.username%></span></p>
+                            <p><span class="modify-avatar">裁切头像</span></p>
                             <p><span id="js-logout-btn" class="logout-btn">退出</span></p>
                         </div>
                     </div>
@@ -127,8 +129,27 @@
     <footer class="footer">
         <span>学习交流</span>
     </footer>
+    <div class="mask">
+        <div class="dialog-cut-img">
+            <div class="dci-title">裁剪</div>
+            <div class="dci-con">
+                <div class="jc-demo-box">
+                    <img src="/public/upload/avatar.jpg" id="js-cut-img" alt="avatar" />
+                    <div id="preview-pane" class="sm-cut">
+                        <div class="preview-container">
+                            <img src="/public/upload/avatar.jpg" class="jcrop-preview" alt="Preview" />
+                        </div>
+                    </div>
+                </div>
+                <div class="dci-con-ope">
+                    <span id="cutImage" class="upload-btn">裁剪</span>
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="https://cdn.bootcss.com/jquery/1.8.0/jquery.min.js"></script>
-    <script src="/public//js/utils.js"></script>
+    <script src="/public/js/jquery.Jcrop.js"></script>
+    <script src="/public/js/utils.js"></script>
     <script src="/public/js/main.js"></script>
 </body>
 </html>

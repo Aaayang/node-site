@@ -1,0 +1,326 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    list-style: none;
+}
+
+html {
+    /* background-color: #EBEBEB; */
+}
+
+body {
+    color: #201B16;
+    font-size: 14px;
+    background: url(/public/images/dust.png) repeat;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:link {
+    color: #273035;
+}
+
+a:hover {
+    color: #449d44;
+}
+
+/* banner */
+
+.banner {
+    height: 222px;
+    background: url(/public/images/hello-i-m-nik-800113-unsplash.jpg) no-repeat center center;
+}
+
+/* 导航 */
+
+.nav-wrap {
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgb(219, 216, 199);
+    .nav {
+        margin: 0 auto;
+        width: 1000px;
+        height: 56px;
+        line-height: 56px;
+        font-size: 16px;
+        a {
+            margin: 0 20px;
+        }
+        .active {
+            color: #5cb85c;
+        }
+    }
+}
+
+.content {
+    margin: 0 auto;
+    width: 1000px;
+    display: flex;
+    .content-left {
+        width: 700px;
+        .content-item {
+            margin: 20px 0;
+            background-color: #fff;
+            padding: 30px;
+        }
+        .content-item-title {
+            text-align: center;
+            font-size: 18px;
+        }
+        .content-item-info {
+            text-align: center;
+            margin-top: 20px;
+            color: #ccc;
+        }
+        .content-item-summary {
+            margin-top: 20px;
+        }
+        .content-item-ope {
+            margin-top: 20px;
+        }
+        .content-item-btn {
+            color: #5cb85c;
+            text-decoration: underline;
+        }
+        .content-item-btn:hover {
+            color: #449d44;
+        }
+    }
+    .content-right {
+        padding-top: 20px;
+        flex: 1;
+        margin-left: 20px;
+        .user-info {
+            margin-bottom: 20px;
+            background-color: #fff;
+            .user-info-title {
+                border-bottom: 1px solid #ccc;
+                padding: 10px 20px;
+                font-size: 16px;
+            }
+            .user-info-con {
+                padding: 20px;
+            }
+            .uic {
+                display: flex;
+                justify-content: center;
+                line-height: 20px;
+                align-items: center;
+            }
+            .avatar {
+                width: 70px;
+                height: 70px;
+                border-radius: 50%;
+                overflow: hidden;
+                position: relative;
+                img {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+            .avatar-file {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                opacity: 0;
+            }
+            .uic-info {
+                line-height: 24px;
+                padding-left: 15px;
+            }
+            .modify-avatar {
+                color: #5cb85c;
+                cursor: pointer;
+                &:hover {
+                    color: #449d44;
+                }
+            }
+            .user-info-ope {
+                margin-top: 20px;
+                text-align: center;
+                a {
+                    color: #5cb85c;
+                    text-decoration: underline;
+                    &:hover {
+                        color: #449d44;
+                    }
+                }
+            }
+            .logout-btn {
+                color: #5cb85c;
+                cursor: pointer;
+                &:hover {
+                    color: #449d44;
+                }
+            }
+        }
+        /* 注册/登录 */
+        .reg-or-login {
+            background-color: #fff;
+            padding-bottom: 20px;
+            .rol-title {
+                font-size: 16px;
+                padding: 10px 20px;
+                border-bottom: 1px solid #ccc;
+            }
+            .rol-list {
+                padding: 10px 20px 0;
+                li {
+                    margin-top: 10px;
+                }
+                li:last-of-type {
+                    margin-top: 20px;
+                    text-align: right;
+                    font-size: 12px;
+                }
+                input {
+                    border-radius: 4px;
+                    padding: 0 6px;
+                    box-sizing: border-box;
+                    width: 100%;
+                    height: 26px;
+                    border: 1px solid #ccc;
+                    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+                    &:focus {
+                        outline: none;
+                        box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
+                    }
+                }
+                .rol-link {
+                    color: #5cb85c;
+                    &:hover {
+                        color: #449d44;
+                    }
+                }
+            }
+            .login-reg-tip {
+                float: left;
+                display: none;
+            }
+            .tip-err {
+                color: #ec971f;
+            }
+            .tip-suc {
+                color: #5cb85c;
+            }
+            .rol-btn {
+                border-radius: 4px;
+                color: #fff;
+                display: block;
+                height: 26px;
+                line-height: 26px;
+                background-color: #5cb85c;
+                text-align: center;
+                cursor: pointer;
+                border: 1px solid #4cae4c;
+                &:hover {
+                    background-color: #449d44;
+                    border-color: #398439;
+                }
+            }
+        }
+        /* 友情链接 */
+        .friend-link {
+            margin-top: 20px;
+            background-color: #fff;
+            .fl-title {
+                font-size: 16px;
+                padding: 10px 20px;
+                border-bottom: 1px solid #ccc;
+            }
+            .fl-list {
+                line-height: 24px;
+                padding: 20px;
+            }
+            .fl-list a {
+                text-decoration: underline;
+            }
+        }
+    }
+}
+
+/* 页脚 */
+
+.footer {
+    height: 56px;
+    line-height: 56px;
+    background-color: #1D1812;
+    text-align: center;
+    color: #fff;
+}
+
+.mask {
+    z-index: 9;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, .3);
+    /* 裁切弹框 */
+    .dialog-cut-img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 300px;
+        min-height: 200px;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+        border: 1px solid rgba(0, 0, 0, .2);
+        border-radius: 6px;
+        background-color: #fff;
+    }
+    .dci-title {
+        padding: 8px 14px;
+        background-color: #f7f7f7;
+        border-bottom: 1px solid #ebebeb;
+        border-radius: 5px 5px 0 0;
+    }
+    .dci-con {
+        position: relative;
+        min-height: 200px;
+        padding: 20px;
+        .jc-demo-box {
+            img {
+                width: 100%;
+                height: 100%;
+            }
+            .jcrop-keymgr {
+                opacity: 0;
+            }
+            .sm-cut {
+                position: absolute;
+                z-index: 20;
+                top: -55px;
+                left: -300px;
+                .preview-container {
+                    width: 164px;
+                    height: 164px;
+                    border-radius: 50%;
+                    overflow: hidden;
+                }
+            }
+        }
+        .dci-con-ope {
+            padding-top: 20px;
+            text-align: center;
+        }
+        .upload-btn {
+            border-radius: 4px;
+            display: inline-block;
+            padding: 6px 12px;
+            color: #fff;
+            cursor: pointer;
+            background-color: #5cb85c;
+            border: 1px solid #4cae4c;
+            &:hover {
+                border-color: #398439;
+                background-color: #449d44;
+            }
+        }
+    }
+}

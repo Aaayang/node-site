@@ -2,6 +2,9 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
 const crypto = require('crypto');
+const formidable = require('formidable');
+const path = require('path');
+const fs = require('fs');
 
 let responseData = {};
 router.use((req, res, next) => {
@@ -85,9 +88,9 @@ router.post('/login',checkLoginInfo, (req, res) => {
         password
     }).then(findRes => {
         if(findRes) {
-            let {_id, username, isAdmin} = findRes;
+            let {_id, username, isAdmin,avatar} = findRes;
             // 登录的时候设置 session 到 cookie
-            req.session.userInfo = {_id,username,isAdmin};
+            req.session.userInfo = {_id,username,isAdmin,avatar};
             responseData.msg = '登录成功';
             return res.json(responseData);
         } else {
@@ -103,5 +106,31 @@ router.get('/logout', (req, res) => {
     responseData.msg = '退出成功';
     return res.json(responseData);
 });
+
+
+// 上传头像
+router.post('/upload', (req, res) => {
+    let form = new formidable.IncomingForm();
+    form.uploadDir = path.join(__dirname, '/../public/upload');
+    form.parse(req, (err, fields, files) => {
+        let extName = path.extname(files.avatar.name),
+            oldFile = files.avatar.path,
+            fileName = Math.random() + extName,
+            newFile = path.join(__dirname, '/../public/upload/') + fileName;
+            
+            fs.rename(oldFile, newFile, err => {
+                if(err) {
+                    responseData.code = 1;
+                    responseData.msg = '上传成功，但改名失败了';
+                    return res.json(responseData);
+                }
+                // 记录下头像名
+                req.session.userInfo.avatar = fileName;
+                responseData.avatar = fileName;
+                responseData.msg = '上传并改名成功';
+                return res.json(responseData);
+            });
+    });
+})
 
 module.exports = router;
