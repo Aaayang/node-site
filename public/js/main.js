@@ -21,6 +21,9 @@ $(function () {
 
             this.$mask = $('#js-mask');
 
+            // this.$showCut = $('#js-show-cut:contains(裁剪)');
+            this.$showCut = $('#js-show-cut');
+
             this.loginData = {
                 titleTxt: "登录",
                 repassword: false,
@@ -140,9 +143,9 @@ $(function () {
         }
         function opeCutImg() {
             let that = this;
-            let $showCut = $('#js-show-cut');
+            
             let $cutImg = $('#js-cut-img');
-            $showCut.on('click', function() {
+            this.$showCut.on('click', function() {
                 that.$mask.show();
                 let jcrop_api,
                     boundx,

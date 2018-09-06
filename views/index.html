@@ -82,7 +82,12 @@
                         </div>
                         <div class="uic-info">
                             <p><span>用户名：<%=userInfo.username%></span></p>
-                            <p><span id="js-show-cut" class="modify-avatar">裁切头像</span></p>
+                            <%if(userInfo.cutTip==="裁剪头像"){%>
+                                <p><span id="js-show-cut" class="modify-avatar"><%=userInfo.cutTip%></span></p>
+                            <%} else {%>
+                                <p><span class="modify-avatar-tip"><%=userInfo.cutTip%></span></p>
+                            <%}%>
+                            
                             <p><span id="js-logout-btn" class="logout-btn">退出</span></p>
                         </div>
                     </div>

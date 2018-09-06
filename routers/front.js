@@ -93,6 +93,7 @@ router.post('/login',checkLoginInfo, (req, res) => {
 
             // 登录的时候设置 session 到 cookie
             req.session.userInfo = {_id,username,isAdmin,avatar};
+            req.session.userInfo.cutTip = '点击头像可以上传';
             responseData.msg = '登录成功';
             return res.json(responseData);
         } else {
@@ -126,6 +127,19 @@ router.post('/upload', (req, res) => {
                     responseData.msg = '上传成功，但改名失败了';
                     return res.json(responseData);
                 }
+
+                // 这里考虑是不是和下面的代码优化一下
+                // 上传头像名存入数据库，登录成功后再取出
+                User.update({
+                    _id: req.session.userInfo._id
+                }, {
+                    '$set': {
+                        avatar: fileName
+                    }
+                }).then(res => {
+                    // console.log(res, 2333);
+                });
+
                 // 上传成功，改名成功后把图片改成需要的大小，很关键！！
                 gm(newFile).resize(264)// 等比变成宽度264
                 .crop(264, 264, 0, 0)// 保留高度264，使不溢出
@@ -135,8 +149,11 @@ router.post('/upload', (req, res) => {
                         responseData.msg = '缩放图片失败';
                         return res.json(responseData);
                     }
+                    // 上传头像的时候是会走这里
+                    console.log('2333');
                     // 记录下头像名
                     req.session.userInfo.avatar = fileName;
+                    req.session.userInfo.cutTip = '裁剪头像';
                     // 前端拿到这个名字也可以进行更新，也可以reload一下
                     responseData.avatar = fileName;
                     responseData.msg = '已改成目标大小';
@@ -163,6 +180,7 @@ router.get('/cutimg', (req, res) => {
                 return res.json(responseData);
             }
             responseData.msg = '裁剪成功';
+            req.session.userInfo.cutTip = '再次上传头像后可以裁剪';
             res.json(responseData);
         });
 });

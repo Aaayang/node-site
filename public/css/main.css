@@ -111,6 +111,8 @@ a:hover {
         cursor: pointer; }
         .content .content-right .user-info .modify-avatar:hover {
           color: #449d44; }
+      .content .content-right .user-info .modify-avatar-tip {
+        color: #ccc; }
       .content .content-right .user-info .user-info-ope {
         margin-top: 20px;
         text-align: center; }
