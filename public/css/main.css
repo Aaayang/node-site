@@ -10,7 +10,7 @@ html {
   /* background-color: #EBEBEB; */ }
 
 body {
-  color: #979797;
+  color: #111;
   font-size: 14px;
   background: url(/public/images/dust.png) repeat; }
 
@@ -22,6 +22,15 @@ a:link {
 
 a:hover {
   color: #303030; }
+
+.com-btn {
+  padding: 6px 12px;
+  color: #fff;
+  background-color: #f4645f;
+  transition: .6s; }
+
+.com-btn:hover {
+  background-color: #303030; }
 
 /* banner */
 .banner {
@@ -38,7 +47,7 @@ a:hover {
     height: 56px;
     font-size: 16px; }
     .nav-wrap .nav a {
-      color: #979797;
+      color: #111;
       float: left;
       height: 54px;
       line-height: 54px;
@@ -80,12 +89,7 @@ a:hover {
       margin-top: 20px; }
     .content .content-left .content-item-btn {
       display: inline-block;
-      padding: 6px 12px;
-      color: #fff;
-      background-color: #f4645f;
-      transition: .6s; }
-    .content .content-left .content-item-btn:hover {
-      background-color: #303030; }
+      color: #fff; }
   .content .content-right {
     padding-top: 20px;
     flex: 1;
@@ -107,8 +111,8 @@ a:hover {
         line-height: 20px;
         align-items: center; }
       .content .content-right .user-info .avatar {
-        width: 70px;
-        height: 70px;
+        width: 90px;
+        height: 90px;
         border-radius: 50%;
         overflow: hidden;
         position: relative; }
@@ -124,6 +128,8 @@ a:hover {
         flex: 1;
         line-height: 24px;
         padding-left: 15px; }
+        .content .content-right .user-info .uic-info p:not(:last-of-type) {
+          margin-bottom: 10px; }
       .content .content-right .user-info .modify-avatar {
         color: #f4645f;
         cursor: pointer; }
@@ -131,19 +137,23 @@ a:hover {
           color: #303030; }
       .content .content-right .user-info .modify-avatar-tip {
         color: #ccc; }
+      .content .content-right .user-info .logout-btn {
+        display: inline-block;
+        font-size: 12px;
+        padding: 0 10px;
+        cursor: pointer; }
+      .content .content-right .user-info .niubi {
+        margin: 0 auto;
+        width: 198px;
+        height: 50px; }
       .content .content-right .user-info .user-info-ope {
-        margin-top: 20px;
+        margin-top: 15px;
         text-align: center; }
         .content .content-right .user-info .user-info-ope a {
           color: #f4645f;
           text-decoration: underline; }
           .content .content-right .user-info .user-info-ope a:hover {
             color: #303030; }
-      .content .content-right .user-info .logout-btn {
-        color: #f4645f;
-        cursor: pointer; }
-        .content .content-right .user-info .logout-btn:hover {
-          color: #303030; }
     .content .content-right .reg-or-login {
       background-color: #fff;
       padding-bottom: 20px; }
@@ -178,23 +188,13 @@ a:hover {
         float: left;
         display: none; }
       .content .content-right .reg-or-login .tip-err {
-        color: #ec971f; }
+        color: #f4645f; }
       .content .content-right .reg-or-login .tip-suc {
         color: #f4645f; }
       .content .content-right .reg-or-login .rol-btn {
-        border-radius: 4px;
-        color: #fff;
         display: block;
-        height: 26px;
-        line-height: 26px;
-        background-color: #f4645f;
         text-align: center;
-        cursor: pointer;
-        border: 1px solid #f4645f;
-        transition: .6s; }
-        .content .content-right .reg-or-login .rol-btn:hover {
-          background-color: #303030;
-          border-color: #303030; }
+        cursor: pointer; }
     .content .content-right .friend-link {
       margin-top: 20px;
       background-color: #fff; }
@@ -206,7 +206,7 @@ a:hover {
         line-height: 24px;
         padding: 20px; }
       .content .content-right .friend-link .fl-list a {
-        color: #979797;
+        color: #111;
         text-decoration: underline; }
         .content .content-right .friend-link .fl-list a:hover {
           color: #303030; }
@@ -321,9 +321,10 @@ a:hover {
     height: 70px;
     line-height: 70px;
     text-align: center;
-    background-color: #f4645f; }
+    background-color: #f4645f;
+    transition: font-size .3s; }
     .details .ct-input-btn:hover {
-      background-color: #303030; }
+      font-size: 20px; }
   .details .ct-login-tip {
     cursor: pointer;
     margin-top: 10px;
@@ -331,9 +332,10 @@ a:hover {
     padding: 6px 12px;
     text-align: center;
     border-radius: 4px;
-    background-color: #d9534f; }
+    background-color: #f4645f;
+    transition: .6s; }
     .details .ct-login-tip:hover {
-      background-color: #c9302c; }
+      background-color: #303030; }
   .details .ct-none {
     margin-top: 10px;
     line-height: 20px; }
@@ -348,7 +350,7 @@ a:hover {
       height: 50px;
       background-color: pink; }
     .details .ct-list .cl-info {
-      border: 1px solid #979797;
+      border: 1px solid #111;
       margin-left: 15px;
       flex: 1; }
     .details .ct-list .cl-info-title {
@@ -357,7 +359,7 @@ a:hover {
       padding-left: 20px;
       height: 40px;
       line-height: 40px;
-      background-color: #979797;
+      background-color: #111;
       position: relative; }
       .details .ct-list .cl-info-title:before {
         content: "";
@@ -366,7 +368,7 @@ a:hover {
         left: -6px;
         border-top: 6px solid transparent;
         border-bottom: 6px solid transparent;
-        border-left: 6px solid #979797;
+        border-left: 6px solid #111;
         transform: rotate(45deg); }
       .details .ct-list .cl-info-title:after {
         content: "";

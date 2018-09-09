@@ -1,10 +1,7 @@
 // 基础变量定义
-$baseCol: #979797;
+$baseCol: #111;
 $normalCol: #f4645f;
 $normalColHover: #303030;
-
-$errorCol: #d9534f;
-$errorColHover: #c9302c;
 
 
 // .....................................统一.................................
@@ -33,6 +30,18 @@ a:link {
 a:hover {
     color: $normalColHover;
 }
+
+// .............................................公共..............................................
+.com-btn {
+    padding: 6px 12px;
+    color: #fff;
+    background-color: $normalCol;
+    transition: .6s;
+}
+.com-btn:hover {
+    background-color: $normalColHover;
+}
+
 
 // ..................................................首页相关..................................
 
@@ -120,13 +129,10 @@ a:hover {
         }
         .content-item-btn {
             display: inline-block;
-            padding: 6px 12px;
             color: #fff;
-            background-color: $normalCol;
-            transition: .6s;
         }
         .content-item-btn:hover {
-            background-color: $normalColHover;
+            
         }
     }
     .content-right {
@@ -151,8 +157,8 @@ a:hover {
                 align-items: center;
             }
             .avatar {
-                width: 70px;
-                height: 70px;
+                width: 90px;
+                height: 90px;
                 border-radius: 50%;
                 overflow: hidden;
                 position: relative;
@@ -171,7 +177,11 @@ a:hover {
                 flex: 1;
                 line-height: 24px;
                 padding-left: 15px;
+                p:not(:last-of-type){
+                    margin-bottom: 10px;
+                }
             }
+
             .modify-avatar {
                 color: $normalCol;
                 cursor: pointer;
@@ -182,8 +192,20 @@ a:hover {
             .modify-avatar-tip{
                 color: #ccc;
             }
+            
+            .logout-btn {
+                display: inline-block;
+                font-size: 12px;
+                padding: 0 10px;
+                cursor: pointer;
+            }
+            .niubi{
+                margin: 0 auto;
+                width: 198px;
+                height: 50px;
+            }
             .user-info-ope {
-                margin-top: 20px;
+                margin-top: 15px;
                 text-align: center;
                 a {
                     color: $normalCol;
@@ -191,13 +213,6 @@ a:hover {
                     &:hover {
                         color: $normalColHover;
                     }
-                }
-            }
-            .logout-btn {
-                color: $normalCol;
-                cursor: pointer;
-                &:hover {
-                    color: $normalColHover;
                 }
             }
         }
@@ -245,26 +260,15 @@ a:hover {
                 display: none;
             }
             .tip-err {
-                color: #ec971f;
+                color: $normalCol;
             }
             .tip-suc {
                 color: $normalCol;
             }
             .rol-btn {
-                border-radius: 4px;
-                color: #fff;
                 display: block;
-                height: 26px;
-                line-height: 26px;
-                background-color: $normalCol;
                 text-align: center;
                 cursor: pointer;
-                border: 1px solid $normalCol;
-                transition: .6s;
-                &:hover {
-                    background-color: $normalColHover;
-                    border-color: $normalColHover;
-                }
             }
         }
         /* 友情链接 */
@@ -430,8 +434,9 @@ a:hover {
         line-height: 70px;
         text-align: center;
         background-color: $normalCol;
+        transition: font-size .3s;
         &:hover{
-            background-color: $normalColHover;
+            font-size: 20px;
         }
     }
     .ct-login-tip{
@@ -441,9 +446,10 @@ a:hover {
         padding: 6px 12px;
         text-align: center;
         border-radius: 4px;
-        background-color: $errorCol;
+        background-color: $normalCol;
+        transition: .6s;
         &:hover{
-            background-color: $errorColHover;
+            background-color: $normalColHover;
         }
     }
     .ct-none{
@@ -458,6 +464,7 @@ a:hover {
         li:not(:last-of-type){
             margin-bottom: 20px;
         }
+        // 评论头像
         .avatar{
             width: 50px;
             height: 50px;
@@ -474,7 +481,7 @@ a:hover {
             padding-left: 20px;
             height: 40px;
             line-height: 40px;
-            background-color: $baseCol;
+            background-color: #111;
             position: relative;
             &:before{
                 content: "";
@@ -483,7 +490,7 @@ a:hover {
                 left: -6px;
                 border-top: 6px solid transparent;
                 border-bottom: 6px solid transparent;
-                border-left: 6px solid $baseCol;
+                border-left: 6px solid #111;
                 transform: rotate(45deg);
             }
             &:after{
