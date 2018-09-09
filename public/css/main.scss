@@ -1,7 +1,8 @@
 // 基础变量定义
 $baseCol: #979797;
-$normalCol: #5cb85c;
-$normalColHover: #449d44;
+$normalCol: #f4645f;
+$normalColHover: #303030;
+
 $errorCol: #d9534f;
 $errorColHover: #c9302c;
 
@@ -93,12 +94,13 @@ a:hover {
                 margin-right: 16px;
             }
             i{
-                color:$normalCol;
                 font-style: normal;
             }
         }
         .cii-name{
-            
+            i{
+                color:$normalCol;
+            }
         }
         .cii-time{
 
@@ -117,11 +119,14 @@ a:hover {
             margin-top: 20px;
         }
         .content-item-btn {
-            color: $normalCol;
-            text-decoration: underline;
+            display: inline-block;
+            padding: 6px 12px;
+            color: #fff;
+            background-color: $normalCol;
+            transition: .6s;
         }
         .content-item-btn:hover {
-            color: $normalColHover;
+            background-color: $normalColHover;
         }
     }
     .content-right {
@@ -254,10 +259,11 @@ a:hover {
                 background-color: $normalCol;
                 text-align: center;
                 cursor: pointer;
-                border: 1px solid #4cae4c;
+                border: 1px solid $normalCol;
+                transition: .6s;
                 &:hover {
                     background-color: $normalColHover;
-                    border-color: #398439;
+                    border-color: $normalColHover;
                 }
             }
         }

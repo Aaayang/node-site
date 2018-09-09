@@ -33,6 +33,14 @@ app.use('/public', express.static('public'));
 // app.engine('ejs', require('ejs').__express);
 app.set('view engine', 'ejs');
 
+// 定义全局的返回信息
+app.use((req, res, next) => {
+    req.responseData = {};
+    req.responseData.code = 0;
+    req.responseData.msg = '';
+    next();
+});
+
 // 前台
 app.use('/', require('./routers/front'));
 app.use('/admin', require('./routers/admin'));

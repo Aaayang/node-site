@@ -4,4 +4,7 @@
 
 .admin-wrap{
     padding: 0 10px;
+    .ca-line:not(:last-of-type){
+        margin-bottom: 20px;
+    }
 }

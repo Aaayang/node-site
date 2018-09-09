@@ -9,8 +9,7 @@ const gm = require('gm');
 
 let responseData = {};
 router.use((req, res, next) => {
-    responseData.code = 0;
-    responseData.msg = '';
+    responseData = req.responseData
     next();
 });
 

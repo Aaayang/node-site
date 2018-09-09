@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/public/css/admin.css">
     <script src="https://cdn.bootcss.com/jquery/1.10.0/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="/public/js/admin.js"></script>
 </head>
 
 <body>
@@ -32,7 +33,11 @@
             <% include content_add %>
         <% } else if(page==="contentlist"){ %>
             <% include content_list %>
-        <% } %>    
+        <% } else if(page==="successtip"){ %>
+            <% include common/success_tip %>
+        <% } else if(page==="errortip"){ %>
+            <% include common/success_tip %>
+        <% } %>
     </div>
     
 </body>

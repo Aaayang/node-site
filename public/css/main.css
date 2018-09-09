@@ -21,7 +21,7 @@ a:link {
   color: #273035; }
 
 a:hover {
-  color: #449d44; }
+  color: #303030; }
 
 /* banner */
 .banner {
@@ -46,9 +46,9 @@ a:hover {
       border-bottom: 2px solid transparent;
       margin-right: 5px; }
     .nav-wrap .nav:hover {
-      color: #5cb85c; }
+      color: #f4645f; }
     .nav-wrap .nav .active {
-      border-color: #5cb85c; }
+      border-color: #f4645f; }
 
 .content {
   margin: 0 auto;
@@ -70,18 +70,22 @@ a:hover {
       .content .content-left .content-item-info span {
         margin-right: 16px; }
       .content .content-left .content-item-info i {
-        color: #5cb85c;
         font-style: normal; }
+    .content .content-left .cii-name i {
+      color: #f4645f; }
     .content .content-left .content-item-summary {
       margin-top: 20px;
       line-height: 26px; }
     .content .content-left .content-item-ope {
       margin-top: 20px; }
     .content .content-left .content-item-btn {
-      color: #5cb85c;
-      text-decoration: underline; }
+      display: inline-block;
+      padding: 6px 12px;
+      color: #fff;
+      background-color: #f4645f;
+      transition: .6s; }
     .content .content-left .content-item-btn:hover {
-      color: #449d44; }
+      background-color: #303030; }
   .content .content-right {
     padding-top: 20px;
     flex: 1;
@@ -121,25 +125,25 @@ a:hover {
         line-height: 24px;
         padding-left: 15px; }
       .content .content-right .user-info .modify-avatar {
-        color: #5cb85c;
+        color: #f4645f;
         cursor: pointer; }
         .content .content-right .user-info .modify-avatar:hover {
-          color: #449d44; }
+          color: #303030; }
       .content .content-right .user-info .modify-avatar-tip {
         color: #ccc; }
       .content .content-right .user-info .user-info-ope {
         margin-top: 20px;
         text-align: center; }
         .content .content-right .user-info .user-info-ope a {
-          color: #5cb85c;
+          color: #f4645f;
           text-decoration: underline; }
           .content .content-right .user-info .user-info-ope a:hover {
-            color: #449d44; }
+            color: #303030; }
       .content .content-right .user-info .logout-btn {
-        color: #5cb85c;
+        color: #f4645f;
         cursor: pointer; }
         .content .content-right .user-info .logout-btn:hover {
-          color: #449d44; }
+          color: #303030; }
     .content .content-right .reg-or-login {
       background-color: #fff;
       padding-bottom: 20px; }
@@ -167,29 +171,30 @@ a:hover {
             outline: none;
             box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6); }
         .content .content-right .reg-or-login .rol-list .rol-link {
-          color: #5cb85c; }
+          color: #f4645f; }
           .content .content-right .reg-or-login .rol-list .rol-link:hover {
-            color: #449d44; }
+            color: #303030; }
       .content .content-right .reg-or-login .login-reg-tip {
         float: left;
         display: none; }
       .content .content-right .reg-or-login .tip-err {
         color: #ec971f; }
       .content .content-right .reg-or-login .tip-suc {
-        color: #5cb85c; }
+        color: #f4645f; }
       .content .content-right .reg-or-login .rol-btn {
         border-radius: 4px;
         color: #fff;
         display: block;
         height: 26px;
         line-height: 26px;
-        background-color: #5cb85c;
+        background-color: #f4645f;
         text-align: center;
         cursor: pointer;
-        border: 1px solid #4cae4c; }
+        border: 1px solid #f4645f;
+        transition: .6s; }
         .content .content-right .reg-or-login .rol-btn:hover {
-          background-color: #449d44;
-          border-color: #398439; }
+          background-color: #303030;
+          border-color: #303030; }
     .content .content-right .friend-link {
       margin-top: 20px;
       background-color: #fff; }
@@ -204,7 +209,7 @@ a:hover {
         color: #979797;
         text-decoration: underline; }
         .content .content-right .friend-link .fl-list a:hover {
-          color: #449d44; }
+          color: #303030; }
 
 /* 页脚 */
 .footer {
@@ -276,11 +281,11 @@ a:hover {
       padding: 6px 12px;
       color: #fff;
       cursor: pointer;
-      background-color: #5cb85c;
+      background-color: #f4645f;
       border: 1px solid #4cae4c; }
       .mask .dci-con .upload-btn:hover {
         border-color: #398439;
-        background-color: #449d44; }
+        background-color: #303030; }
 
 .details {
   min-height: 200px; }
@@ -308,7 +313,7 @@ a:hover {
   .details .ct-input-con {
     flex: 1;
     height: 68px;
-    border-color: #5cb85c; }
+    border-color: #f4645f; }
   .details .ct-input-btn {
     color: #fff;
     cursor: pointer;
@@ -316,9 +321,9 @@ a:hover {
     height: 70px;
     line-height: 70px;
     text-align: center;
-    background-color: #5cb85c; }
+    background-color: #f4645f; }
     .details .ct-input-btn:hover {
-      background-color: #449d44; }
+      background-color: #303030; }
   .details .ct-login-tip {
     cursor: pointer;
     margin-top: 10px;

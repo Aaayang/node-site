@@ -14,13 +14,15 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td>false</td>
-        </tr>
+        <% userList.forEach((user,idx) => { %>
+            <tr>
+                <th scope="row"><%= idx %></th>
+                <td><%= user._id %></td>
+                <td><%= user.username %></td>
+                <td><%= user.password %></td>
+                <td><%= user.isAdmin ? '是' : '否' %></td>
+            </tr>
+        <% }); %>
     </tbody>
 </table>
 
