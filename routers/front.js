@@ -16,10 +16,20 @@ router.use((req, res, next) => {
 
 // 首页
 router.get('/', (req, res) => {
-    res.render('index', {
+    res.render('frame', {
+        page: "index",
         userInfo: req.session.userInfo
     });
 });
+
+// 详情
+router.get('/details', (req, res) => {
+    res.render('frame', {
+        page: "details",
+        userInfo: req.session.userInfo
+    });
+});
+
 
 // 后端验证
 function checkRegInfo (req, res, next) {

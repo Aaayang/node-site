@@ -1,0 +1,58 @@
+<% if(userInfo){ %>
+<div class="user-info">
+    <h3 class="user-info-title">用户信息</h3>
+    <div class="user-info-con">
+        <div class="uic">
+            <div class="avatar">
+                <input id="js-avatar-file" class="avatar-file" type="file" name="avatar">
+                <img id="js-avatar-img" src="/public/upload/<%= userInfo.avatar %>" alt="">
+            </div>
+            <div class="uic-info">
+                <p><span>用户名：<%= userInfo.username %></span></p>
+                <% if(userInfo.cutTip==="裁剪头像"){ %>
+                    <p><span id="js-show-cut" class="modify-avatar"><%= userInfo.cutTip %></span></p>
+                <% } else { %>
+                    <p><span class="modify-avatar-tip"><%= userInfo.cutTip %></span></p>
+                <% } %>
+                
+                <p><span id="js-logout-btn" class="logout-btn">退出</span></p>
+            </div>
+        </div>
+        <% if(userInfo.isAdmin){ %>
+        <div class="user-info-ope">牛逼，你是管理员，<a href="javascript:;">管理后台</a></div>
+        <% } %>
+    </div>
+</div>
+<% } %>
+<% if(!userInfo){ %>
+<div class="reg-or-login" id="js-loginbox">
+    <h3 id="js-login-title" class="rol-title">登录</h3>
+    <ul class="rol-list">
+        <li>
+            <input id="js-username" class="rol-username" type="text" placeholder="请输入用户名">
+        </li>
+        <li>
+            <input id="js-password" class="rol-password" type="text" placeholder="请输入密码">
+        </li>
+        <li>
+            <input style="display: none;" id="js-repassword" class="rol-repassword" type="text" placeholder="请确认密码">
+        </li>
+        <li>
+            <span id="js-loginorreg-btn" class="rol-btn">登录</span>
+        </li>
+        <li>
+            <span id="js-login-reg-tip" class="login-reg-tip"></span>
+            <span id="js-login-tip" class="rol-tip">没有账号？</span>
+            <a id="js-login-change" href="javascript:;" class="rol-link">马上注册</a>
+        </li>
+    </ul>
+</div>
+<% } %>
+<div class="friend-link">
+    <h3 class="fl-title">友链</h3>
+    <ul class="fl-list">
+        <li>
+            <a target="_blank" href="https://nodejs.org/zh-cn/">Node.js</a>
+        </li>
+    </ul>
+</div>

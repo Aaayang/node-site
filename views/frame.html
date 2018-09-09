@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>首页</title>
+    <link rel="shortcut icon" href="/public/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/public/css/jquery.Jcrop.css">
+    <link rel="stylesheet" href="/public/css/main.css">
+</head>
+
+<body>
+    <!-- %- 可以输出非转义的数据到模板 -->
+    <!-- 页头 -->
+    <%- include("common/header.html", {con: "<h1>xx</h1>"}); %>
+    <!-- 导航 -->
+    <% include common/nav.html %>
+    <!-- 内容 -->
+    <div class="content">
+        <!-- 左侧内容 -->
+        <div class="content-left">
+            <% if(page === "index"){ %>
+                <% include index_left.html %>
+            <% } else if(page === "details") { %>
+                <% include details.html %>
+            <% } else { %>
+                <% include 404.html %>
+            <% } %>
+        </div>
+        <!-- 右侧内容 -->
+        <div class="content-right">
+            <% if(page === "index"){ %>
+                <% include index_right.html %>
+            <% } %>
+        </div>
+    </div>
+    <!-- 页脚 -->
+    <footer class="footer">
+        <span>Copyright © 千里封冰 | <a href="http://www.miitbeian.gov.cn" target="_blank">粤ICP备18082097号-1</a></span>
+    </footer>
+    <!-- 裁剪头像弹框 -->
+    <% include common/cut_img.html %>
+    <script src="https://cdn.bootcss.com/jquery/1.8.0/jquery.min.js"></script>
+    <script src="/public/js/jquery.Jcrop.js"></script>
+    <script src="/public/js/utils.js"></script>
+    <script src="/public/js/main.js"></script>
+</body>
+</html>
