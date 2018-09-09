@@ -29,8 +29,9 @@ app.use(session({
 app.use('/public', express.static('public'));
 
 // 模板配置
-app.engine('html', require('ejs').__express);
-app.set('view engine', 'html');
+// Express4 以上默认会用 ejs 渲染 ejs，使用 ejs 后缀时无需再配置
+// app.engine('ejs', require('ejs').__express);
+app.set('view engine', 'ejs');
 
 // 前台
 app.use('/', require('./routers/front'));

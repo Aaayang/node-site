@@ -458,25 +458,26 @@ a:hover {
             background-color: pink;
         }
         .cl-info{
-            border: 1px solid #F4F3F5;
+            border: 1px solid $baseCol;
             margin-left: 15px;
             flex: 1;
         }
         .cl-info-title{
+            color: #fff;
             padding-right: 20px;
             padding-left: 20px;
             height: 40px;
             line-height: 40px;
-            background-color: #F4F3F5;
+            background-color: $baseCol;
             position: relative;
             &:before{
                 content: "";
                 position: absolute;
-                top: 0;
+                top: 10px;
                 left: -6px;
                 border-top: 6px solid transparent;
                 border-bottom: 6px solid transparent;
-                border-left: 6px solid #F4F3F5;
+                border-left: 6px solid $baseCol;
                 transform: rotate(45deg);
             }
             &:after{
@@ -491,7 +492,7 @@ a:hover {
             }
         }
         .cl-info-username{
-            color: #2070e8;
+            color: #fff;
         }
         .cl-info-date{
 

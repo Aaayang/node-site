@@ -14,25 +14,25 @@
 <body>
     <!-- %- 可以输出非转义的数据到模板 -->
     <!-- 页头 -->
-    <%- include("common/header.html", {con: "<h1>xx</h1>"}); %>
+    <%- include("common/header", {con: "<h1>xx</h1>"}); %>
     <!-- 导航 -->
-    <% include common/nav.html %>
+    <% include common/nav %>
     <!-- 内容 -->
     <div class="content">
         <!-- 左侧内容 -->
         <div class="content-left">
             <% if(page === "index"){ %>
-                <% include index_left.html %>
+                <% include index_left %>
             <% } else if(page === "details") { %>
-                <% include details.html %>
+                <% include details %>
             <% } else { %>
-                <% include 404.html %>
+                <% include 404 %>
             <% } %>
         </div>
         <!-- 右侧内容 -->
         <div class="content-right">
             <% if(page === "index"){ %>
-                <% include index_right.html %>
+                <% include index_right %>
             <% } %>
         </div>
     </div>
@@ -41,7 +41,7 @@
         <span>Copyright © 千里封冰 | <a href="http://www.miitbeian.gov.cn" target="_blank">粤ICP备18082097号-1</a></span>
     </footer>
     <!-- 裁剪头像弹框 -->
-    <% include common/cut_img.html %>
+    <% include common/cut_img %>
     <script src="https://cdn.bootcss.com/jquery/1.8.0/jquery.min.js"></script>
     <script src="/public/js/jquery.Jcrop.js"></script>
     <script src="/public/js/utils.js"></script>

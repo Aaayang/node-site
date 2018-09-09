@@ -343,24 +343,25 @@ a:hover {
       height: 50px;
       background-color: pink; }
     .details .ct-list .cl-info {
-      border: 1px solid #F4F3F5;
+      border: 1px solid #979797;
       margin-left: 15px;
       flex: 1; }
     .details .ct-list .cl-info-title {
+      color: #fff;
       padding-right: 20px;
       padding-left: 20px;
       height: 40px;
       line-height: 40px;
-      background-color: #F4F3F5;
+      background-color: #979797;
       position: relative; }
       .details .ct-list .cl-info-title:before {
         content: "";
         position: absolute;
-        top: 0;
+        top: 10px;
         left: -6px;
         border-top: 6px solid transparent;
         border-bottom: 6px solid transparent;
-        border-left: 6px solid #F4F3F5;
+        border-left: 6px solid #979797;
         transform: rotate(45deg); }
       .details .ct-list .cl-info-title:after {
         content: "";
@@ -372,7 +373,7 @@ a:hover {
         border-left: 6px solid #fff;
         transform: rotate(-90deg); }
     .details .ct-list .cl-info-username {
-      color: #2070e8; }
+      color: #fff; }
     .details .ct-list .cl-info-con {
       padding: 20px; }
 

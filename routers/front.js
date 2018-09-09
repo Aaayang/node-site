@@ -16,7 +16,7 @@ router.use((req, res, next) => {
 
 // 首页
 router.get('/', (req, res) => {
-    res.render('frame', {
+    res.render('front/frame', {
         page: "index",
         userInfo: req.session.userInfo
     });
@@ -24,7 +24,7 @@ router.get('/', (req, res) => {
 
 // 详情
 router.get('/details', (req, res) => {
-    res.render('frame', {
+    res.render('front/frame', {
         page: "details",
         userInfo: req.session.userInfo
     });

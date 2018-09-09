@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>管理后台</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/public/css/admin.css">
+    <script src="https://cdn.bootcss.com/jquery/1.10.0/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <% include common/nav %>
+
+    <% if(page==="index") { %>
+        <% include common/header %>
+    <% } %>
+    
+    <div class="admin-wrap">
+        <% if(page==="useradd") { %>
+            <% include user_add %>
+        <% } else if(page==="userlist"){ %>
+            <% include user_list %>
+        <% } else if(page==="classifyadd"){ %>
+            <% include classify_add %>
+        <% } else if(page==="classifylist"){ %>
+            <% include classify_list %>
+        <% } else if(page==="contentadd"){ %>
+            <% include content_add %>
+        <% } else if(page==="contentlist"){ %>
+            <% include content_list %>
+        <% } %>    
+    </div>
+    
+</body>
+
+</html>
