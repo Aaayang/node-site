@@ -125,43 +125,48 @@ router.post('/classifymodify', (req, res) => {
             responseData.title = '成功提示';
             responseData.msg = '你没有进行任何修改';
             responseData.url = '/admin/classifylist';
-            return res.render('admin/frame', {
+            res.render('admin/frame', {
                 page: 'msgtip',
                 responseData
             });
+            return Promise.reject('没有改动');
         } else {
             // 说明改动了，再看改动后的名称数据库中是否存在
-            Classify.findOne({
+            return Classify.findOne({
                 name: classifyname
-            }).then(doc => {
-                if(doc) {
-                    // 数据库中存在，说明重名了
-                    responseData.title = '错误提示';
-                    responseData.msg = '已经有相同名称，不能重复';
-                    responseData.url = '/admin/classifylist';
-                    res.render('admin/frame', {
-                        page: 'msgtip',
-                        responseData
-                    });
-                } else {
-                    Classify.updateOne({
-                        _id: id
-                    }, {
-                        '$set': {
-                            name: classifyname
-                        }
-                    }).then(doc => {
-                        responseData.title = '成功提示';
-                        responseData.msg = '修改成功';
-                        responseData.url = '/admin/classifylist';
-                        res.render('admin/frame', {
-                            page: 'msgtip',
-                            responseData
-                        });
-                    });
-                }
-            });
+            })
         }
+    }).then(doc => {
+        if(doc) {
+            // 数据库中存在，说明重名了
+            responseData.title = '错误提示';
+            responseData.msg = '已经有相同名称，不能重复';
+            responseData.url = '/admin/classifylist';
+            res.render('admin/frame', {
+                page: 'msgtip',
+                responseData
+            });
+            return Promise.reject('已经有相同名称');
+        } else {
+            // 正常修改
+            return Classify.updateOne({
+                _id: id
+            }, {
+                '$set': {
+                    name: classifyname
+                }
+            })
+        }
+    }).then(doc => {
+        responseData.title = '成功提示';
+        responseData.msg = '修改成功';
+        responseData.url = '/admin/classifylist';
+        res.render('admin/frame', {
+            page: 'msgtip',
+            responseData
+        });
+    }).catch(err => {
+        console.log(err);
     });
 });
 
