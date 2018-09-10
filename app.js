@@ -47,11 +47,12 @@ app.use('/admin', require('./routers/admin'));
 
 // 404
 app.get('*', (req, res) => {
-    res.render('frame', {
+    res.render('common/404', {
         page: '404',
         userInfo: req.session.userInfo
     });
 });
+
 
 mongoose.connect(config.DB_URL, {
     useNewUrlParser: true
