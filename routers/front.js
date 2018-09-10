@@ -6,18 +6,24 @@ const formidable = require('formidable');
 const path = require('path');
 const fs = require('fs');
 const gm = require('gm');
+const Classify = require('../models/Classify');
 
 let responseData = {};
+
 router.use((req, res, next) => {
     responseData = req.responseData
-    next();
+    Classify.find({}).then(doc => {
+        responseData.classifies = doc;
+        next();
+    });
 });
 
 // 首页
 router.get('/', (req, res) => {
     res.render('front/frame', {
         page: "index",
-        userInfo: req.session.userInfo
+        userInfo: req.session.userInfo,
+        classifies: responseData.classifies
     });
 });
 
@@ -25,7 +31,8 @@ router.get('/', (req, res) => {
 router.get('/details', (req, res) => {
     res.render('front/frame', {
         page: "details",
-        userInfo: req.session.userInfo
+        userInfo: req.session.userInfo,
+        classifies: responseData.classifies
     });
 });
 
@@ -87,6 +94,7 @@ function checkLoginInfo(req, res, next) {
     next();
 }
 
+// 登录
 router.post('/login',checkLoginInfo, (req, res) => {
     let {username, password} = req.body;
     let hmac = crypto.createHmac('sha1', 'weixian');
@@ -113,6 +121,7 @@ router.post('/login',checkLoginInfo, (req, res) => {
     });
 });
 
+// 退出
 router.get('/logout', (req, res) => {
     req.session.userInfo = null;
     responseData.msg = '退出成功';
@@ -193,5 +202,8 @@ router.get('/cutimg', (req, res) => {
             res.json(responseData);
         });
 });
+
+
+
 
 module.exports = router;

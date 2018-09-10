@@ -13,15 +13,17 @@
         </tr>
     </thead>
     <tbody>
+        <% classifies.forEach((item,idx) => { %>
         <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
+            <th scope="row"><%= idx %></th>
+            <td><%= item._id %></td>
+            <td><%= item.name %></td>
             <td>
                 <a href="javascript:;">修改</a>
                 <a href="javascript:;">删除</a>
             </td>
         </tr>
+        <% }); %>
     </tbody>
 </table>
 

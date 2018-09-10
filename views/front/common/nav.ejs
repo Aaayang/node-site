@@ -1,7 +1,8 @@
 <div class="nav-wrap">
     <nav class="nav">
-        <a class="active" href="javascript:;">首页</a>
-        <a href="javascript:;">aaa</a>
-        <a href="javascript:;">bbb</a>
+        <a href="/">首页</a>
+        <% classifies.forEach((item,idx) => { %>
+        <a href="javascript:;"><%= item.name %></a>
+        <% }); %>
     </nav>
 </div>

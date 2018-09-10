@@ -45,7 +45,8 @@ a:hover {
     margin: 0 auto;
     width: 1000px;
     height: 56px;
-    font-size: 16px; }
+    font-size: 16px;
+    overflow: hidden; }
     .nav-wrap .nav a {
       color: #111;
       float: left;
@@ -54,10 +55,10 @@ a:hover {
       padding: 0 20px;
       border-bottom: 2px solid transparent;
       margin-right: 5px; }
-    .nav-wrap .nav:hover {
-      color: #f4645f; }
-    .nav-wrap .nav .active {
-      border-color: #f4645f; }
+      .nav-wrap .nav a:hover {
+        color: #f4645f; }
+      .nav-wrap .nav a.active {
+        border-color: #f4645f; }
 
 .content {
   margin: 0 auto;
@@ -213,6 +214,7 @@ a:hover {
 
 /* 页脚 */
 .footer {
+  margin-top: 20px;
   font-size: 13px;
   padding-top: 20px;
   padding-bottom: 20px;

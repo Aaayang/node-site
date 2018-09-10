@@ -44,13 +44,30 @@ router.get('/classifyadd', (req, res) => {
 // 分类添加接口
 router.post('/classifyadd', (req, res) => {
     let {classifyname} = req.body;
-    Classify.create({
+    Classify.find({
         name: classifyname
     }).then(doc => {
-        responseData.msg = doc.name;
-        // 注意前端要是 form 表单形式的提交        
-        res.render('admin/frame', {
-            page: 'successtip'
+        if(doc.length) {
+            responseData.title = '错误提示';
+            responseData.msg = "分类已经存在，不能重复添加";
+            responseData.url = '/admin/classifyadd';
+            return res.render('admin/frame', {
+                page: 'msgtip',
+                responseData
+            });
+        }
+        Classify.create({
+            name: classifyname
+        }).then(doc => {
+            responseData.title = '成功提示';
+            responseData.msg = '提交成功';
+            responseData.url = '/admin/classifylist';
+            responseData.name = doc.name;
+            // 注意前端要是 form 表单形式的提交        
+            res.render('admin/frame', {
+                page: 'msgtip',
+                responseData
+            });
         });
     });
 });
@@ -58,11 +75,13 @@ router.post('/classifyadd', (req, res) => {
 
 // 分类列表
 router.get('/classifylist', (req, res) => {
-    res.render('admin/frame', {
-        page: "classifylist",
+    Classify.find({}).then(doc => {
+        res.render('admin/frame', {
+            page: "classifylist",
+            classifies: doc
+        });    
     });
 });
-
 
 
 // 内容添加
