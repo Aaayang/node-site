@@ -32,12 +32,10 @@ router.get('/userlist', (req, res) => {
     });
 });
 
-
-
 // 分类添加页面
 router.get('/classifyadd', (req, res) => {
     res.render('admin/frame', {
-        page: "classifyadd",
+        page: "classifyadd"
     });
 });
 
@@ -82,6 +80,91 @@ router.get('/classifylist', (req, res) => {
         });    
     });
 });
+
+// 分类删除
+router.get('/classifydelete', (req, res) => {
+    let {id} = req.query;
+    Classify.deleteOne({
+        _id: id
+    }).then(doc => {
+        responseData.title = '成功提示';
+        responseData.msg = '删除成功';
+        responseData.url = '/admin/classifylist';
+        res.render('admin/frame', {
+            page: 'msgtip',
+            responseData
+        });
+    });
+});
+
+// 分类修改
+router.get('/classifymodify', (req, res) => {
+    let {id} = req.query;
+    Classify.findOne({
+        _id: id
+    }).then(doc => {
+        res.render('admin/frame', {
+            id: id,
+            page: "classifymodify",
+            name: doc.name
+        });
+    });
+});
+
+// 修改分类名称，待优化
+router.post('/classifymodify', (req, res) => {
+    let {id, classifyname} = req.body;
+
+    // 先查看是否存在
+    // 一定是查 ID，证明有没有改动
+    Classify.findOne({
+        _id: id
+    }).then(doc => {
+        if(classifyname === doc.name) {
+            // 说明没有改动
+            responseData.title = '成功提示';
+            responseData.msg = '你没有进行任何修改';
+            responseData.url = '/admin/classifylist';
+            return res.render('admin/frame', {
+                page: 'msgtip',
+                responseData
+            });
+        } else {
+            // 说明改动了，再看改动后的名称数据库中是否存在
+            Classify.findOne({
+                name: classifyname
+            }).then(doc => {
+                if(doc) {
+                    // 数据库中存在，说明重名了
+                    responseData.title = '错误提示';
+                    responseData.msg = '已经有相同名称，不能重复';
+                    responseData.url = '/admin/classifylist';
+                    res.render('admin/frame', {
+                        page: 'msgtip',
+                        responseData
+                    });
+                } else {
+                    Classify.updateOne({
+                        _id: id
+                    }, {
+                        '$set': {
+                            name: classifyname
+                        }
+                    }).then(doc => {
+                        responseData.title = '成功提示';
+                        responseData.msg = '修改成功';
+                        responseData.url = '/admin/classifylist';
+                        res.render('admin/frame', {
+                            page: 'msgtip',
+                            responseData
+                        });
+                    });
+                }
+            });
+        }
+    });
+});
+
 
 // 内容添加
 router.get('/contentadd', (req, res) => {
