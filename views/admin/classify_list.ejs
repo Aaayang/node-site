@@ -15,7 +15,7 @@
     <tbody>
         <% classifies.forEach((item,idx) => { %>
         <tr>
-            <th scope="row"><%= idx %></th>
+            <th scope="row"><%= (pageNow - 1) * limit + idx %></th>
             <td><%= item._id %></td>
             <td><%= item.name %></td>
             <td>

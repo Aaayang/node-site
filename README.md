@@ -84,3 +84,15 @@
 ## 关于 Promise.reject()
 
 ## 把对数据库的操作由嵌套改成 Promise 的写法
+
+## 分页
+
+- pageNow: 当前页，默认从 1 开始
+
+- limit: 每页条数
+
+- counts: 总条数
+
+- pages: 总页数，limit / counts
+
+- skip: 跳过前 (pageNow - 1) * limit 条

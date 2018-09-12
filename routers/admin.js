@@ -73,12 +73,37 @@ router.post('/classifyadd', (req, res) => {
 
 // 分类列表
 router.get('/classifylist', (req, res) => {
-    Classify.find({}).then(doc => {
-        res.render('admin/frame', {
-            page: "classifylist",
-            classifies: doc
-        });    
-    });
+    // 当前页
+    let {pageNow=1} = req.query;
+
+    Classify.countDocuments().then(counts => {
+        // 每页显示条数
+        let limit = 5;
+        // 总共多少页
+        let pages = Math.ceil(counts / limit);
+
+        // 最小是 1
+        pageNow = Math.max(pageNow, 1);
+        // 最大是 pages
+        pageNow = Math.min(pageNow, pages);
+
+        // 跳过多少条
+        let skip = (pageNow - 1) * limit;
+        
+
+        Classify.find().limit(limit).skip(skip).then(doc => {
+            res.render('admin/frame', {
+                page: "classifylist",
+                classifies: doc,
+                counts: counts,
+                pageNow: pageNow,
+                limit: limit,
+                pages: pages
+            });    
+        }).catch(err => {
+            console.log(err);
+        });
+    })
 });
 
 // 分类删除
@@ -111,7 +136,7 @@ router.get('/classifymodify', (req, res) => {
     });
 });
 
-// 修改分类名称，待优化
+// 修改分类名称
 router.post('/classifymodify', (req, res) => {
     let {id, classifyname} = req.body;
 
