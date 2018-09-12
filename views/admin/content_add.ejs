@@ -3,3 +3,26 @@
     <li class="active">添加内容</li>
 </ol>
 
+<form class="content-add" method="POST" action="/admin/contentadd">
+    <div class="ca-line">
+        <label for="categoryname">文章分类：</label>
+        <select id="categoryname" name="categoryname" class="form-control">
+            <option value="ggg">ggg</option>
+        </select>
+    </div>
+    <div class="ca-line">
+        <label for="contenttitle">文章标题：</label>
+        <input id="contenttitle" type="input" class="form-control" name="contenttitle"  placeholder="请输入文章标题">
+    </div>
+    <div class="ca-line">
+        <label for="categorydesc">文章简介：</label>
+        <textarea id="categorydesc" name="contentdesc" class="form-control" rows="5" placeholder="请输入文章简介"></textarea>
+    </div>
+    <div class="ca-line">
+        <label for="contentcon">文章内容：</label>
+        <textarea id="contentcon" name="contentcon" class="form-control" rows="5" placeholder="请输入文章内容"></textarea>
+    </div>
+    <div class="ca-line">
+        <button type="submit" class="btn btn-default">确认添加</button>
+    </div>
+</form>

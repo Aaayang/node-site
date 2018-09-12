@@ -96,3 +96,11 @@
 - pages: 总页数，limit / counts
 
 - skip: 跳过前 (pageNow - 1) * limit 条
+
+
+分页时，前端索引是通过 (pageNow - 1) * limit + idx 计算得出的，也可以在数据库中加索引，可以改进
+
+
+## 后端分页可以封装
+
+

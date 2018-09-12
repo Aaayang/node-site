@@ -202,11 +202,40 @@ router.get('/contentadd', (req, res) => {
         page: "contentadd",
     });
 });
+
 // 内容列表
 router.get('/contentlist', (req, res) => {
-    res.render('admin/frame', {
-        page: "contentlist",
-    });
+    // 当前页
+    let {pageNow=1} = req.query;
+
+    Classify.countDocuments().then(counts => {
+        // 每页显示条数
+        let limit = 5;
+        // 总共多少页
+        let pages = Math.ceil(counts / limit);
+
+        // 最小是 1
+        pageNow = Math.max(pageNow, 1);
+        // 最大是 pages
+        pageNow = Math.min(pageNow, pages);
+
+        // 跳过多少条
+        let skip = (pageNow - 1) * limit;
+        
+
+        Classify.find().limit(limit).skip(skip).then(doc => {
+            res.render('admin/frame', {
+                page: "contentlist",
+                classifies: doc,
+                counts: counts,
+                pageNow: pageNow,
+                limit: limit,
+                pages: pages
+            });    
+        }).catch(err => {
+            console.log(err);
+        });
+    })
 });
 
 
