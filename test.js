@@ -9,9 +9,11 @@ test().then(data => {
 }); */
 
 
-let num = 2;
+/* let num = 2;
 // 注意这两种写法对输出 num 的影响
 // ++ num;
 // num + 1;
 
-console.log(num);
+console.log(num); */
+
+console.log(new Date().toLocaleString());

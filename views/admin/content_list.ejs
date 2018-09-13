@@ -24,7 +24,7 @@
             <td><%= item.classify.name %></td>
             <td><%= item.title %></td>
             <td><%= item.user.username %></td>
-            <td><%= item.addTime %></td>
+            <td><%= new Date(item.addTime).toLocaleString() %></td>
             <td><%= item.views %></td>
             <td>
                 <a href="javascript:;">修改</a>

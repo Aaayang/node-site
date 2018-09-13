@@ -7,6 +7,7 @@ const path = require('path');
 const fs = require('fs');
 const gm = require('gm');
 const Classify = require('../models/Classify');
+const Content = require('../models/Content');
 
 let responseData = {};
 
@@ -20,10 +21,13 @@ router.use((req, res, next) => {
 
 // 首页
 router.get('/', (req, res) => {
-    res.render('front/frame', {
-        page: "index",
-        userInfo: req.session.userInfo,
-        classifies: responseData.classifies
+    Content.find().populate(['user']).then(contents => {
+        res.render('front/frame', {
+            page: "index",
+            userInfo: req.session.userInfo,
+            classifies: responseData.classifies,
+            contents: contents
+        });
     });
 });
 
@@ -181,6 +185,7 @@ router.post('/upload', (req, res) => {
     });
 });
 
+// 裁剪头像
 router.get('/cutimg', (req, res) => {
     let imgName = req.session.userInfo.avatar,
         w = req.query.w,
@@ -202,8 +207,6 @@ router.get('/cutimg', (req, res) => {
             res.json(responseData);
         });
 });
-
-
 
 
 module.exports = router;

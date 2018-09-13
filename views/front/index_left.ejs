@@ -1,11 +1,12 @@
 <ul class="content-list">
+    <% contents.forEach((item,idx) => { %>
     <li class="content-item">
-        <h3 class="content-item-title">标题</h3>
+        <h3 class="content-item-title"><%= item.title %></h3>
         <div class="content-item-info">
-            <span class="cii-name">作者：<i>xxx</i></span>
-            <span class="cii-time">时间：<i>2018年xxx</i></span>
-            <span class="cii-read-count">阅读：<i>xxx</i></span>
-            <span class="cii-comment-count">评论：<i>xxx</i></span>
+            <span class="cii-name">作者：<i><%= item.user.username %></i></span>
+            <span class="cii-time">时间：<i><%= new Date(item.addTime).toLocaleString() %></i></span>
+            <span class="cii-read-count">阅读：<i><%= item.views %></i></span>
+            <span class="cii-comment-count">评论：<i><%= item.comments %></i></span>
         </div>
         <div class="content-item-summary">
             <span>上周我们 发布 了一个新版本，包含了大家期盼已久的功能：主题模板和网站对本地化的支持。 这个功能完全是由我们的一个贡献者（Juan）开发的，Ghost 基金提供了支持。 我们已经针对这个功能编写了完整的文档，下面就来介绍一下这个功能是如何工作的： 网站本地化 你可以在 Ghos ...</span>
@@ -14,4 +15,5 @@
             <a class="content-item-btn com-btn" href="/details">阅读全文</a>
         </div>
     </li>
+    <% }); %>
 </ul>
