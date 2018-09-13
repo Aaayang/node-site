@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
 const Classify = require('../models/Classify');
+const Content = require('../models/Content');
 
 let responseData = {};
 router.use((req, res, next) => {
@@ -32,13 +33,14 @@ router.get('/userlist', (req, res) => {
     });
 });
 
+
+// ...................................分类相关开始...................................
 // 分类添加页面
 router.get('/classifyadd', (req, res) => {
     res.render('admin/frame', {
         page: "classifyadd"
     });
 });
-
 // 分类添加接口
 router.post('/classifyadd', (req, res) => {
     let {classifyname} = req.body;
@@ -58,7 +60,7 @@ router.post('/classifyadd', (req, res) => {
             name: classifyname
         }).then(doc => {
             responseData.title = '成功提示';
-            responseData.msg = '提交成功';
+            responseData.msg = '分类添加成功';
             responseData.url = '/admin/classifylist';
             responseData.name = doc.name;
             // 注意前端要是 form 表单形式的提交        
@@ -69,8 +71,6 @@ router.post('/classifyadd', (req, res) => {
         });
     });
 });
-
-
 // 分类列表
 router.get('/classifylist', (req, res) => {
     // 当前页
@@ -105,7 +105,6 @@ router.get('/classifylist', (req, res) => {
         });
     })
 });
-
 // 分类删除
 router.get('/classifydelete', (req, res) => {
     let {id} = req.query;
@@ -121,7 +120,6 @@ router.get('/classifydelete', (req, res) => {
         });
     });
 });
-
 // 分类修改
 router.get('/classifymodify', (req, res) => {
     let {id} = req.query;
@@ -135,7 +133,6 @@ router.get('/classifymodify', (req, res) => {
         });
     });
 });
-
 // 修改分类名称
 router.post('/classifymodify', (req, res) => {
     let {id, classifyname} = req.body;
@@ -194,12 +191,45 @@ router.post('/classifymodify', (req, res) => {
         console.log(err);
     });
 });
+// ...................................分类相关结束...................................
 
 
-// 内容添加
+// ...................................内容相关开始...................................
+// 内容添加页面
 router.get('/contentadd', (req, res) => {
+    Classify.find().then(classifies => {
+        res.render('admin/frame', {
+            page: "contentadd",
+            classifies: classifies
+        });
+    });
+});
+// 内容添加接口
+router.post('/contentadd', (req, res) => {
+    // 验空
+
+    // 分类、标题、描述、内容，用户、添加时间、访问量、评论
+    let {contentclassify, contenttitle, contentdesc, contentcon} = req.body;
+    
+    Content.create({
+        classify: contentclassify,
+        title: contenttitle,
+        description: contentdesc,
+        content: contentcon,
+        user: req.session.userInfo._id // 注意是从 session 中拿的，考虑是否可以优化？
+    }).then(doc => {
+        
+    }).catch(err => {
+        console.log(err);
+    });
+    
+    responseData.title = '成功提示';
+    responseData.msg = '内容添加成功';
+    responseData.url = '/admin/contentlist';
+    responseData.name = 'xxx';
     res.render('admin/frame', {
-        page: "contentadd",
+        page: 'msgtip',
+        responseData
     });
 });
 
@@ -237,6 +267,8 @@ router.get('/contentlist', (req, res) => {
         });
     })
 });
+// ...................................内容相关结束...................................
+
 
 
 module.exports = router;

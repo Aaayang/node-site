@@ -5,9 +5,11 @@
 
 <form class="content-add" method="POST" action="/admin/contentadd">
     <div class="ca-line">
-        <label for="categoryname">文章分类：</label>
-        <select id="categoryname" name="categoryname" class="form-control">
-            <option value="ggg">ggg</option>
+        <label for="contentclassify">文章分类：</label>
+        <select id="contentclassify" name="contentclassify" class="form-control">
+            <% classifies.forEach(item => { %>
+            <option value="<%= item._id %>"><%= item.name %></option>
+            <% }); %>
         </select>
     </div>
     <div class="ca-line">

@@ -105,3 +105,6 @@
 
 ## mongo 的多表联查
 
+## 接口的管理
+
+例如内容添加应该是 content/add 而不是 contentadd，待改进
