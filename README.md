@@ -103,8 +103,38 @@
 
 ## 后端分页可以封装
 
-## mongo 的多表联查
+## mongo 的多表联查（populate）
+
+### step1
+
+``` javascript
+let contentSchema = new mongoose.Schema({
+    // 分类，注意这个值必须是 Classify 存在的 ID
+    classify: {
+        type: mongoose.Schema.Types.ObjectId,
+        // mongoose.model('Classify', classifiesSchema);
+        ref: 'Classify'
+    }
+});
+```
+
+### step2
+
+contents 表接收到的 classify 字段必须是 Classify(classifies) 表中的 id
+
+``` javascript
+module.exports = mongoose.model('Content', contentSchema);
+```
+
+### step3
+
+正常查询得到的只是普通的 classify id，通过 populate 可以把 classify id 相关的内容也取出来
+
+``` javascript
+Content.find().limit(limit).skip(skip).populate(['classify'])
+```
 
 ## 接口的管理
 
 例如内容添加应该是 content/add 而不是 contentadd，待改进
+

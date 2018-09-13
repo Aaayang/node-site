@@ -29,7 +29,7 @@ router.get('/userlist', (req, res) => {
         res.render('admin/frame', {
             page: "userlist",
             userList
-        });    
+        });
     });
 });
 
@@ -43,11 +43,11 @@ router.get('/classifyadd', (req, res) => {
 });
 // 分类添加接口
 router.post('/classifyadd', (req, res) => {
-    let {classifyname} = req.body;
+    let { classifyname } = req.body;
     Classify.find({
         name: classifyname
     }).then(doc => {
-        if(doc.length) {
+        if (doc.length) {
             responseData.title = '错误提示';
             responseData.msg = "分类已经存在，不能重复添加";
             responseData.url = '/admin/classifyadd';
@@ -74,7 +74,7 @@ router.post('/classifyadd', (req, res) => {
 // 分类列表
 router.get('/classifylist', (req, res) => {
     // 当前页
-    let {pageNow=1} = req.query;
+    let { pageNow = 1 } = req.query;
 
     Classify.countDocuments().then(counts => {
         // 每页显示条数
@@ -89,7 +89,7 @@ router.get('/classifylist', (req, res) => {
 
         // 跳过多少条
         let skip = (pageNow - 1) * limit;
-        
+
 
         Classify.find().limit(limit).skip(skip).then(doc => {
             res.render('admin/frame', {
@@ -99,7 +99,7 @@ router.get('/classifylist', (req, res) => {
                 pageNow: pageNow,
                 limit: limit,
                 pages: pages
-            });    
+            });
         }).catch(err => {
             console.log(err);
         });
@@ -107,7 +107,7 @@ router.get('/classifylist', (req, res) => {
 });
 // 分类删除
 router.get('/classifydelete', (req, res) => {
-    let {id} = req.query;
+    let { id } = req.query;
     Classify.deleteOne({
         _id: id
     }).then(doc => {
@@ -122,7 +122,7 @@ router.get('/classifydelete', (req, res) => {
 });
 // 分类修改
 router.get('/classifymodify', (req, res) => {
-    let {id} = req.query;
+    let { id } = req.query;
     Classify.findOne({
         _id: id
     }).then(doc => {
@@ -135,14 +135,14 @@ router.get('/classifymodify', (req, res) => {
 });
 // 修改分类名称
 router.post('/classifymodify', (req, res) => {
-    let {id, classifyname} = req.body;
+    let { id, classifyname } = req.body;
 
     // 先查看是否存在
     // 一定是查 ID，证明有没有改动
     Classify.findOne({
         _id: id
     }).then(doc => {
-        if(classifyname === doc.name) {
+        if (classifyname === doc.name) {
             // 说明没有改动
             responseData.title = '成功提示';
             responseData.msg = '你没有进行任何修改';
@@ -159,7 +159,7 @@ router.post('/classifymodify', (req, res) => {
             })
         }
     }).then(doc => {
-        if(doc) {
+        if (doc) {
             // 数据库中存在，说明重名了
             responseData.title = '错误提示';
             responseData.msg = '已经有相同名称，不能重复';
@@ -174,10 +174,10 @@ router.post('/classifymodify', (req, res) => {
             return Classify.updateOne({
                 _id: id
             }, {
-                '$set': {
-                    name: classifyname
-                }
-            })
+                    '$set': {
+                        name: classifyname
+                    }
+                })
         }
     }).then(doc => {
         responseData.title = '成功提示';
@@ -209,8 +209,8 @@ router.post('/contentadd', (req, res) => {
     // 验空
 
     // 分类、标题、描述、内容，用户、添加时间、访问量、评论
-    let {contentclassify, contenttitle, contentdesc, contentcon} = req.body;
-    
+    let { contentclassify, contenttitle, contentdesc, contentcon } = req.body;
+
     Content.create({
         classify: contentclassify,
         title: contenttitle,
@@ -218,54 +218,53 @@ router.post('/contentadd', (req, res) => {
         content: contentcon,
         user: req.session.userInfo._id // 注意是从 session 中拿的，考虑是否可以优化？
     }).then(doc => {
-        
+        responseData.title = '成功提示';
+        responseData.msg = '内容添加成功';
+        responseData.url = '/admin/contentlist';
+        responseData.name = 'xxx';
+        res.render('admin/frame', {
+            page: 'msgtip',
+            responseData
+        });
     }).catch(err => {
         console.log(err);
-    });
-    
-    responseData.title = '成功提示';
-    responseData.msg = '内容添加成功';
-    responseData.url = '/admin/contentlist';
-    responseData.name = 'xxx';
-    res.render('admin/frame', {
-        page: 'msgtip',
-        responseData
     });
 });
 
 // 内容列表
 router.get('/contentlist', (req, res) => {
-    // 当前页
-    let {pageNow=1} = req.query;
+    
+        // 分页相关
+        let { pageNow = 1 } = req.query;
 
-    Classify.countDocuments().then(counts => {
-        // 每页显示条数
-        let limit = 5;
-        // 总共多少页
-        let pages = Math.ceil(counts / limit);
+        Content.countDocuments().then(counts => {
+            // 每页显示条数
+            let limit = 5;
+            // 总共多少页
+            let pages = Math.ceil(counts / limit);
 
-        // 最小是 1
-        pageNow = Math.max(pageNow, 1);
-        // 最大是 pages
-        pageNow = Math.min(pageNow, pages);
+            // 最小是 1
+            pageNow = Math.max(pageNow, 1);
+            // 最大是 pages
+            pageNow = Math.min(pageNow, pages);
 
-        // 跳过多少条
-        let skip = (pageNow - 1) * limit;
-        
+            // 跳过多少条
+            let skip = (pageNow - 1) * limit;
 
-        Classify.find().limit(limit).skip(skip).then(doc => {
-            res.render('admin/frame', {
-                page: "contentlist",
-                classifies: doc,
-                counts: counts,
-                pageNow: pageNow,
-                limit: limit,
-                pages: pages
-            });    
-        }).catch(err => {
-            console.log(err);
-        });
-    })
+            Content.find().limit(limit).skip(skip).populate(['classify', 'user']).then(contents => {
+                res.render('admin/frame', {
+                    page: "contentlist",
+                    counts: counts,
+                    pageNow: pageNow,
+                    limit: limit,
+                    pages: pages,
+                    contents: contents,
+                });
+            }).catch(err => {
+                console.log(err);
+            });
+        })
+
 });
 // ...................................内容相关结束...................................
 

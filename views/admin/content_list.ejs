@@ -17,19 +17,21 @@
         </tr>
     </thead>
     <tbody>
+        <% contents.forEach((item, idx) => { %>
         <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>技术</td>
-            <td>Node</td>
-            <td>yangk</td>
-            <td>2018年9月9日</td>
-            <td>989</td>
+            <th scope="row"><%= (pageNow - 1) * limit + idx %></th>
+            <td><%= item._id %></td>
+            <td><%= item.classify.name %></td>
+            <td><%= item.title %></td>
+            <td><%= item.user.username %></td>
+            <td><%= item.addTime %></td>
+            <td><%= item.views %></td>
             <td>
                 <a href="javascript:;">修改</a>
                 <a href="javascript:;">删除</a>
             </td>
         </tr>
+        <% }); %>
     </tbody>
 </table>
 
