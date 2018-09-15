@@ -147,3 +147,7 @@ Content.find().limit(limit).skip(skip).populate(['classify'])
 ## 添加 comment 情况数据库
 
 ## 关联表是在已经有另外一个表的情况下才能进行关联，评论不太合适
+
+## 区分 req.cookies.set 和 req.session 两种设置 cookie 的异同
+
+## 区分 save 和 create 的异同

@@ -1,17 +1,23 @@
 <div class="details">
-    <ul class="content-list">
-        <li class="content-item">
-            <h3 class="content-item-title"><%= content.title %></h3>
-            <div class="content-item-info">
-                <span class="cii-name">作者：<i><%= content.user.username %></i></span>
-                <span class="cii-time">时间：<i><%= new Date(content.addTime).toLocaleString() %></i></span>
-                <span class="cii-read-count">阅读：<i><%= content.views %></i></span>
-                <span class="cii-comment-count">评论：<i><%= content.comments.length %></i></span>
-            </div>
-            <div class="content-item-summary">
-                <span><%= content.content %></span>
-            </div>
-        </li>
-    </ul>
-    <% include comments %>
+    <% if(content) { %>
+        <ul class="content-list">
+            <li class="content-item">
+                <h3 class="content-item-title"><%= content.title %></h3>
+                <div class="content-item-info">
+                    <span class="cii-name">作者：<i><%= content.user.username %></i></span>
+                    <span class="cii-time">时间：<i><%= new Date(content.addTime).toLocaleString() %></i></span>
+                    <span class="cii-read-count">阅读：<i><%= content.views %></i></span>
+                    <span class="cii-comment-count">评论：<i><%= content.comments.length %></i></span>
+                </div>
+                <div class="content-item-summary">
+                    <span><%= content.content %></span>
+                </div>
+            </li>
+        </ul>
+        <% include comments %>
+    <% } else { %>
+        <div class="none-con">
+            <span>没东西</span>
+        </div>
+    <% } %>
 </div>

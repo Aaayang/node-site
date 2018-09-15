@@ -24,6 +24,10 @@ $(function () {
             // this.$showCut = $('#js-show-cut:contains(裁剪)');
             this.$showCut = $('#js-show-cut');
 
+            this.$commentCon = $('#js-comment-con');
+            this.$commentBtn = $('#js-comment-btn');
+            this.$contentId = $('#js-content-id');
+
             this.loginData = {
                 titleTxt: "登录",
                 repassword: false,
@@ -57,6 +61,9 @@ $(function () {
             this.handleMask();
 
             this.confirmCutImg();
+
+            // 评论，上面待改写
+            this.$commentBtn.on('click', this.handleCommit.bind(this));
         }
         function switchLoginReg() {
             let that = this;
@@ -213,6 +220,51 @@ $(function () {
                 });
             });
         }
+        function handleCommit() {
+            let contentId = this.$contentId.val();
+            let commentCon = this.$commentCon.val();
+            let url = '/comment';
+            let data = {
+                contentId,
+                commentCon
+            };
+
+            Utils.ajax({ url, data }).then(res => {
+                if (!res.code) {
+                    renderComments(res.comments);
+                } else {
+
+                }
+            });
+
+        }
+        function renderComments(comments) {
+            if(comments.length === 1) {
+                // 第一次的时候刷新一下，不然 #js-comments-list 还没出来，是获取不到的
+                location.reload();
+            }
+            let $commentsList = $('#js-comments-list');
+            let htmlStr = '';
+            comments.forEach(item => {
+                htmlStr += `
+                    <li>
+                        <div class="avatar">
+                            <img src="/public/upload/${item.user.avatar}"/>
+                        </div>
+                        <div class="cl-info">
+                            <div class="cl-info-title">
+                                <span class="cl-info-username">${item.user.username}</span>
+                                <span class="cl-info-date">${new Date(item.commentTime).toLocaleString()}</span>
+                            </div>
+                            <div class="cl-info-con">
+                                <span>${item.content}</span>
+                            </div>
+                        </div>
+                    </li>
+                `;
+            });
+            $commentsList.html(htmlStr);
+        }
         return {
             init,
             bindEvent,
@@ -223,7 +275,8 @@ $(function () {
             uploadAvatar,
             opeCutImg,
             handleMask,
-            confirmCutImg
+            confirmCutImg,
+            handleCommit
         };
     }();
     Index.init();

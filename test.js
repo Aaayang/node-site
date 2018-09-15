@@ -16,4 +16,5 @@ test().then(data => {
 
 console.log(num); */
 
+// node 和浏览器中的 toLocaleString 转换出来的结果表示方式是不一样的
 console.log(new Date().toLocaleString());

@@ -12,7 +12,8 @@
             <span><%= item.content %></span>
         </div>
         <div class="content-item-ope">
-            <a class="content-item-btn com-btn" href="/details?contentid=<%= item._id %>">阅读全文</a>
+            <!-- classifyid 是为了点击详情页时header的激活状态也和原理保持一致 -->
+            <a class="content-item-btn com-btn" href="/details?classifyid=<%= classifyid %>&contentid=<%= item._id %>">阅读全文</a>
         </div>
     </li>
     <% }); %>

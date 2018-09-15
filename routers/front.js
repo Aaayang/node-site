@@ -29,8 +29,6 @@ router.get('/', (req, res) => {
         where.classify = classifyid;
     }
 
-    
-
     Content.where(where).countDocuments().then(counts => {
         let limit = 2;
         let pages = Math.ceil(counts / limit); // 总页数
@@ -64,16 +62,16 @@ router.get('/details', (req, res) => {
     Content.findOne({
         _id: contentid
     }).populate(['user']).then(content => {
+        // console.log(content, 222);
         res.render('front/frame', {
             page: "details",
             userInfo: req.session.userInfo,
             classifies: responseData.classifies,
             content: content,
-            classifyid: classifyid
+            classifyid
         });    
     });
 });
-
 
 // 后端验证
 function checkRegInfo (req, res, next) {
@@ -244,7 +242,25 @@ router.get('/cutimg', (req, res) => {
 
 // 评论
 router.post('/comment', (req, res) => {
-
+    let {commentCon,contentId} = req.body;
+    
+    // 根据内容 ID 查到内容里面的 comments
+    Content.findOne({
+        _id: contentId
+    }).then(content => {
+        // 每一条评论都应该有自己的用户相关的信息，因为每一篇文章下面可以有不同的用户进行评论
+        content.comments.push({
+            user: req.session.userInfo,
+            content: commentCon,
+            commentTime: new Date().getTime()
+        });
+        return content.save(); // 或者create
+    }).then(newContent => {
+        // save 的结果
+        responseData.msg = '评论成功';
+        responseData.comments = newContent.comments;
+        res.json(responseData);
+    });
 });
 
 

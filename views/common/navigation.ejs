@@ -1,3 +1,4 @@
+<% if(pages > 1) { %>
 <nav>
     <ul class="pager">
         <!-- 注意 ++ pageNow 和 pageNow + 1 的区别 -->
@@ -26,3 +27,8 @@
         </li>
     </ul>
 </nav>
+<% } else if(pages < 1) { %>
+    <div class="none-con">
+        <span>没东西</span>
+    </div>
+<% } %>
