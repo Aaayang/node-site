@@ -13,7 +13,7 @@ let responseData = {};
 
 router.use((req, res, next) => {
     responseData = req.responseData
-    Classify.find({}).then(doc => {
+    Classify.find().then(doc => {
         responseData.classifies = doc;
         next();
     });
@@ -21,22 +21,56 @@ router.use((req, res, next) => {
 
 // 首页
 router.get('/', (req, res) => {
-    Content.find().populate(['user']).then(contents => {
-        res.render('front/frame', {
-            page: "index",
-            userInfo: req.session.userInfo,
-            classifies: responseData.classifies,
-            contents: contents
+    // 先找出所有内容，返回内容的 classify 值和请求到的 id 相等的内容
+    let {classifyid, pageNow=1} = req.query;
+    let where = {};
+    // 访问首页的时候不会走这里，where 为空对象刚好是查询全部
+    if(classifyid) {
+        where.classify = classifyid;
+    }
+
+    
+
+    Content.where(where).countDocuments().then(counts => {
+        let limit = 2;
+        let pages = Math.ceil(counts / limit); // 总页数
+
+        pageNow = Math.max(pageNow, 1); // 最小
+        pageNow = Math.min(pageNow, pages); // 最大
+
+        Content.find().where(where).limit(limit).populate(['user']).then(contents => {
+            // console.log(responseData.classifies, 233);
+            res.render('front/frame', {
+                page: "index",
+                userInfo: req.session.userInfo,
+                classifies: responseData.classifies,
+                classifyid: classifyid, // 做 active 用的
+                contents,
+                pageNow,
+                limit,
+                pages,
+                counts
+            });
         });
     });
+
+    
+    
 });
 
 // 详情
 router.get('/details', (req, res) => {
-    res.render('front/frame', {
-        page: "details",
-        userInfo: req.session.userInfo,
-        classifies: responseData.classifies
+    let {contentid, classifyid} = req.query;
+    Content.findOne({
+        _id: contentid
+    }).populate(['user']).then(content => {
+        res.render('front/frame', {
+            page: "details",
+            userInfo: req.session.userInfo,
+            classifies: responseData.classifies,
+            content: content,
+            classifyid: classifyid
+        });    
     });
 });
 
@@ -172,7 +206,7 @@ router.post('/upload', (req, res) => {
                         return res.json(responseData);
                     }
                     // 上传头像的时候是会走这里
-                    console.log('2333');
+                    // console.log('2333');
                     // 记录下头像名
                     req.session.userInfo.avatar = fileName;
                     req.session.userInfo.cutTip = '裁剪头像';
@@ -206,6 +240,11 @@ router.get('/cutimg', (req, res) => {
             req.session.userInfo.cutTip = '再次上传头像后可以裁剪';
             res.json(responseData);
         });
+});
+
+// 评论
+router.post('/comment', (req, res) => {
+
 });
 
 

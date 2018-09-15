@@ -138,3 +138,12 @@ Content.find().limit(limit).skip(skip).populate(['classify'])
 
 例如内容添加应该是 content/add 而不是 contentadd，待改进
 
+## 分页样式统一
+
+## 分页那里的数据返回要规整下
+
+## 分页组件那里待优化
+
+## 添加 comment 情况数据库
+
+## 关联表是在已经有另外一个表的情况下才能进行关联，评论不太合适
